@@ -358,7 +358,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* Leadership Section */}
+        {/* Certifications Section */}
         <section ref={leadershipRef} className="py-20 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -372,99 +372,84 @@ export default function About() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Leadership Team
+                Certifications & Affiliations
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Meet the visionary leaders driving innovation in renewable
-                energy solutions.
+                Recognitions and partnerships that validate our commitment to
+                quality, safety, and clean energy leadership in India.
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {leadership.map((leader, index) => (
-                <motion.div
-                  key={leader.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={
-                    isLeadershipInView
-                      ? { opacity: 1, y: 0 }
-                      : { opacity: 0, y: 50 }
-                  }
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="group"
-                  onMouseEnter={() => setFlippedCard(leader.id)}
-                  onMouseLeave={() => setFlippedCard(null)}
-                >
-                  <div
-                    className="relative w-full h-80 duration-500 transition-transform"
-                    style={{
-                      perspective: "1000px",
-                      transformStyle: "preserve-3d",
-                      transform:
-                        flippedCard === leader.id
-                          ? "rotateY(180deg)"
-                          : "rotateY(0deg)",
-                    }}
+              {[
+                {
+                  title: "ISO Certified",
+                  subtitle: "ISO 9001 & ISO 14001",
+                  description:
+                    "Certified quality and environmental management systems across our operations.",
+                  icon: Award,
+                  colorBg: "bg-solar-500/10",
+                  colorFg: "text-solar-700",
+                },
+                {
+                  title: "Startup India Recognized",
+                  subtitle: "DPIIT Registered",
+                  description:
+                    "Recognized under Startup India for innovation and national impact.",
+                  icon: TrendingUp,
+                  colorBg: "bg-energy-500/10",
+                  colorFg: "text-energy-700",
+                },
+                {
+                  title: "In Collaboration with MNRE",
+                  subtitle: "Govt. of India",
+                  description:
+                    "Working with the Ministry of New & Renewable Energy initiatives and programs.",
+                  icon: Globe,
+                  colorBg: "bg-sky-500/10",
+                  colorFg: "text-sky-700",
+                },
+                {
+                  title: "MSME Registered",
+                  subtitle: "UDYAM Registered",
+                  description:
+                    "Registered MSME strengthening local manufacturing & services.",
+                  icon: Shield,
+                  colorBg: "bg-earth-400/10",
+                  colorFg: "text-earth-700",
+                },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={
+                      isLeadershipInView
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: 40 }
+                    }
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
                   >
-                    {/* Front of card */}
-                    <Card
-                      className="absolute inset-0 w-full h-full border-green-100 hover:border-primary/20 transition-all duration-300"
-                      style={{ backfaceVisibility: "hidden" }}
-                    >
-                      <CardContent className="p-6 text-center h-full flex flex-col justify-center">
-                        <div
-                          className={`w-24 h-24 ${leader.photo} rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold shadow-lg`}
-                        >
-                          {leader.initials}
+                    <Card className="h-full border-green-100 hover:border-primary/20 transition-colors">
+                      <CardContent className="p-6">
+                        <div className={`w-14 h-14 ${item.colorBg} rounded-xl flex items-center justify-center mb-4`}>
+                          <Icon className={`h-7 w-7 ${item.colorFg}`} />
                         </div>
-                        <h3 className="text-xl font-semibold text-foreground mb-2">
-                          {leader.name}
+                        <h3 className="text-xl font-semibold text-foreground mb-1">
+                          {item.title}
                         </h3>
-                        <p className="text-primary font-medium mb-4">
-                          {leader.position}
+                        <p className="text-primary/80 font-medium mb-3">
+                          {item.subtitle}
                         </p>
-                        <div className="mt-auto">
-                          <Badge
-                            variant="outline"
-                            className="border-primary/20 text-primary"
-                          >
-                            Hover for Bio
-                          </Badge>
-                        </div>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {item.description}
+                        </p>
                       </CardContent>
                     </Card>
-
-                    {/* Back of card */}
-                    <Card
-                      className="absolute inset-0 w-full h-full border-green-100 bg-primary/5"
-                      style={{
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                      }}
-                    >
-                      <CardContent className="p-6 h-full flex flex-col justify-center">
-                        <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
-                          <User className="h-6 w-6 text-primary" />
-                        </div>
-                        <h3 className="text-lg font-semibold text-foreground mb-2 text-center">
-                          {leader.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                          {leader.bio}
-                        </p>
-                        <div className="flex justify-center space-x-3 mt-auto">
-                          <div className="bg-primary/10 w-8 h-8 rounded-lg flex items-center justify-center">
-                            <Linkedin className="h-4 w-4 text-primary" />
-                          </div>
-                          <div className="bg-primary/10 w-8 h-8 rounded-lg flex items-center justify-center">
-                            <Mail className="h-4 w-4 text-primary" />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
