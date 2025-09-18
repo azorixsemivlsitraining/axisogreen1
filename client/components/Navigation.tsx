@@ -62,16 +62,16 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Router.Link to="/" className="flex items-center space-x-3">
+            <a href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/" className="flex items-center space-x-3">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F59bf3e928fc9473a97d5e87470c824bb%2F661e86d7a74f464c89095a37afa49cbd?format=webp&width=800"
                 alt="AXISO Green Energy logo"
-                className="h-12 md:h-14 w-auto object-contain"
+                className="h-[66px] w-auto object-contain"
                 loading="eager"
                 decoding="async"
               />
               <span className="sr-only">AXISO Green Energy</span>
-            </Router.Link>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
