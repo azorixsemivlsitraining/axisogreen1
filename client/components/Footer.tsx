@@ -63,15 +63,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
           {/* Company info */}
           <div className="lg:col-span-2">
-            <a href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/" className="flex items-center space-x-3 mb-6 select-none">
+            <a href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/" className="flex flex-col items-start mb-6 select-none">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F1725571c54dc46568e375e4bb423cc1a?format=webp&width=800"
                 alt="AXIS Green Energy logo"
-                className="h-[66px] w-auto object-contain"
+                className="h-[90px] md:h-[96px] w-auto object-contain select-none"
                 loading="lazy"
                 decoding="async"
               />
-              <span className="text-xl font-bold text-white">
+              <span className="mt-3 text-xl font-bold text-white">
                 AXIS Green Energy
               </span>
             </a>
