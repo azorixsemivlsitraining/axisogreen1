@@ -40,10 +40,8 @@ export default function Navigation() {
       ],
     },
     { name: "Industries", path: "/sectors" },
-    { name: "Resources", path: "/resources" },
     { name: "About", path: "/about" },
     { name: "Careers", path: "/careers" },
-    { name: "Contact", path: "/contact" },
   ];
 
   const isActive = (path: string) => {
@@ -224,10 +222,11 @@ export default function Navigation() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
+                  asChild
                   size="sm"
                   className="bg-gradient-to-r from-solar-500 to-energy-500 hover:from-solar-600 hover:to-energy-600 text-white shadow-lg"
                 >
-                  Contact Us
+                  <Router.Link to="/contact">Contact Us</Router.Link>
                 </Button>
               </motion.div>
             </div>
