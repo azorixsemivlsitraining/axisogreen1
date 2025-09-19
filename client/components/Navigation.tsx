@@ -40,8 +40,8 @@ export default function Navigation() {
       ],
     },
     { name: "Industries", path: "/sectors" },
-    { name: "About", path: "/about" },
     { name: "Careers", path: "/careers" },
+    { name: "About", path: "/about" },
   ];
 
   const isActive = (path: string) => {
