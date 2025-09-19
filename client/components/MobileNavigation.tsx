@@ -86,11 +86,6 @@ export default function MobileNavigation() {
       icon: Building,
     },
     {
-      title: "Resources",
-      href: "/resources",
-      icon: FileText,
-    },
-    {
       title: "Careers",
       href: "/careers",
       icon: Briefcase,
@@ -99,11 +94,6 @@ export default function MobileNavigation() {
       title: "About",
       href: "/about",
       icon: Users,
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-      icon: Phone,
     },
   ];
 
@@ -190,98 +180,123 @@ export default function MobileNavigation() {
               <div className="p-6">
                 {/* Navigation Items */}
                 <div className="space-y-2 mb-8">
-                  {!mobileSubOpen && navigationItems.map((item, index) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      {item.submenu ? (
-                        <div className="space-y-2">
-                          <button
-                            onClick={() => toggleDropdown(item.title)}
-                            className={`w-full flex items-center justify-between p-3 rounded-xl text-left font-medium transition-all duration-200 ${activeDropdown === item.title ? "bg-solar-100 text-solar-700" : "text-foreground hover:bg-solar-50"}`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <item.icon className="w-5 h-5" />
-                              <span>{item.title}</span>
-                            </div>
-                            <motion.div
-                              animate={{
-                                rotate: activeDropdown === item.title ? 180 : 0,
-                              }}
-                              transition={{ duration: 0.2 }}
+                  {!mobileSubOpen &&
+                    navigationItems.map((item, index) => (
+                      <motion.div
+                        key={item.title}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        {item.submenu ? (
+                          <div className="space-y-2">
+                            <button
+                              onClick={() => toggleDropdown(item.title)}
+                              className={`w-full flex items-center justify-between p-3 rounded-xl text-left font-medium transition-all duration-200 ${activeDropdown === item.title ? "bg-solar-100 text-solar-700" : "text-foreground hover:bg-solar-50"}`}
                             >
-                              <ChevronDown className="w-4 h-4" />
-                            </motion.div>
-                          </button>
-
-                          <AnimatePresence>
-                            {activeDropdown === item.title && (
+                              <div className="flex items-center gap-3">
+                                <item.icon className="w-5 h-5" />
+                                <span>{item.title}</span>
+                              </div>
                               <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
+                                animate={{
+                                  rotate:
+                                    activeDropdown === item.title ? 180 : 0,
+                                }}
                                 transition={{ duration: 0.2 }}
-                                className="overflow-hidden ml-8 space-y-1"
                               >
-                                {item.submenu.map((subItem, subIndex) => (
-                                  <motion.div
-                                    key={subItem.title}
-                                    initial={{ opacity: 0, x: 10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: subIndex * 0.05 }}
-                                  >
-                                    <div className="flex items-center justify-between">
-                                      <Router.Link
-                                        to={subItem.href}
-                                        className="block p-2 text-sm text-muted-foreground hover:text-solar-600 hover:bg-solar-50 rounded-lg transition-colors"
-                                        onClick={() => setIsOpen(false)}
-                                      >
-                                        {subItem.title}
-                                      </Router.Link>
-
-                                      {/* if subItem has nested sub, show chevron to open nested panel */}
-                                      {subItem.sub && (
-                                        <button
-                                          onClick={(e) => { e.stopPropagation(); setMobileSubOpen(subItem.title); }}
-                                          className="p-1 rounded hover:bg-solar-50"
-                                        >
-                                          <ChevronDown className="w-4 h-4 text-muted-foreground transform rotate-0" />
-                                        </button>
-                                      )}
-                                    </div>
-                                  </motion.div>
-                                ))}
+                                <ChevronDown className="w-4 h-4" />
                               </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      ) : (
-                        <Router.Link
-                          to={item.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`flex items-center gap-3 p-3 rounded-xl font-medium transition-all duration-200 ${isActiveRoute(item.href) ? "bg-gradient-to-r from-solar-100 to-energy-100 text-solar-700" : "text-foreground hover:bg-solar-50"}`}
-                        >
-                          <item.icon className="w-5 h-5" />
-                          <span>{item.title}</span>
-                        </Router.Link>
-                      )}
-                    </motion.div>
-                  ))}
+                            </button>
+
+                            <AnimatePresence>
+                              {activeDropdown === item.title && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="overflow-hidden ml-8 space-y-1"
+                                >
+                                  {item.submenu.map((subItem, subIndex) => (
+                                    <motion.div
+                                      key={subItem.title}
+                                      initial={{ opacity: 0, x: 10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: subIndex * 0.05 }}
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <Router.Link
+                                          to={subItem.href}
+                                          className="block p-2 text-sm text-muted-foreground hover:text-solar-600 hover:bg-solar-50 rounded-lg transition-colors"
+                                          onClick={() => setIsOpen(false)}
+                                        >
+                                          {subItem.title}
+                                        </Router.Link>
+
+                                        {/* if subItem has nested sub, show chevron to open nested panel */}
+                                        {subItem.sub && (
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              setMobileSubOpen(subItem.title);
+                                            }}
+                                            className="p-1 rounded hover:bg-solar-50"
+                                          >
+                                            <ChevronDown className="w-4 h-4 text-muted-foreground transform rotate-0" />
+                                          </button>
+                                        )}
+                                      </div>
+                                    </motion.div>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        ) : (
+                          <Router.Link
+                            to={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`flex items-center gap-3 p-3 rounded-xl font-medium transition-all duration-200 ${isActiveRoute(item.href) ? "bg-gradient-to-r from-solar-100 to-energy-100 text-solar-700" : "text-foreground hover:bg-solar-50"}`}
+                          >
+                            <item.icon className="w-5 h-5" />
+                            <span>{item.title}</span>
+                          </Router.Link>
+                        )}
+                      </motion.div>
+                    ))}
 
                   {/* If a nested mobile sub is open, render its panel */}
                   {mobileSubOpen && (
-                    <motion.div initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 50, opacity: 0 }} className="bg-white p-2 rounded-lg">
+                    <motion.div
+                      initial={{ x: 50, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: 50, opacity: 0 }}
+                      className="bg-white p-2 rounded-lg"
+                    >
                       <div className="flex items-center gap-2 mb-2">
-                        <button onClick={() => setMobileSubOpen(null)} className="p-2 rounded hover:bg-solar-50">Back</button>
+                        <button
+                          onClick={() => setMobileSubOpen(null)}
+                          className="p-2 rounded hover:bg-solar-50"
+                        >
+                          Back
+                        </button>
                         <div className="font-semibold">{mobileSubOpen}</div>
                       </div>
                       <div className="space-y-1">
-                        {navigationItems.flatMap(i => i.submenu || []).find(s => s.title === mobileSubOpen)?.sub?.map(si => (
-                          <Router.Link key={si.href} to={si.href} onClick={() => setIsOpen(false)} className="block p-2 rounded hover:bg-solar-50 text-sm text-foreground">{si.title}</Router.Link>
-                        ))}
+                        {navigationItems
+                          .flatMap((i) => i.submenu || [])
+                          .find((s) => s.title === mobileSubOpen)
+                          ?.sub?.map((si) => (
+                            <Router.Link
+                              key={si.href}
+                              to={si.href}
+                              onClick={() => setIsOpen(false)}
+                              className="block p-2 rounded hover:bg-solar-50 text-sm text-foreground"
+                            >
+                              {si.title}
+                            </Router.Link>
+                          ))}
                       </div>
                     </motion.div>
                   )}

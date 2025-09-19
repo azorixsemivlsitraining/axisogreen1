@@ -20,11 +20,15 @@ export default function Navigation() {
       name: "Solutions",
       path: "/solutions",
       dropdown: [
-        { name: "Solar", path: "/solutions/solar", sub: [
-          { name: "Residential (B2C)", path: "/solutions/b2c" },
-          { name: "Commercial (B2B)", path: "/solutions/b2b" },
-          { name: "Government (B2G)", path: "/solutions/b2g" },
-        ] },
+        {
+          name: "Solar",
+          path: "/solutions/solar",
+          sub: [
+            { name: "Residential (B2C)", path: "/solutions/b2c" },
+            { name: "Commercial (B2B)", path: "/solutions/b2b" },
+            { name: "Government (B2G)", path: "/solutions/b2g" },
+          ],
+        },
         { name: "Wind", path: "/solutions/wind" },
         { name: "Energy Storage", path: "/solutions/storage" },
         { name: "EV Stations", path: "/solutions/ev-stations" },
@@ -40,10 +44,8 @@ export default function Navigation() {
       ],
     },
     { name: "Industries", path: "/sectors" },
-    { name: "Resources", path: "/resources" },
-    { name: "About", path: "/about" },
     { name: "Careers", path: "/careers" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about" },
   ];
 
   const isActive = (path: string) => {
@@ -62,16 +64,19 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Router.Link to="/" className="flex items-center space-x-3">
+            <a
+              href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/"
+              className="flex items-center space-x-3"
+            >
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F59bf3e928fc9473a97d5e87470c824bb%2F661e86d7a74f464c89095a37afa49cbd?format=webp&width=800"
                 alt="AXISO Green Energy logo"
-                className="h-12 md:h-14 w-auto object-contain"
+                className="h-[66px] w-auto object-contain"
                 loading="eager"
                 decoding="async"
               />
               <span className="sr-only">AXISO Green Energy</span>
-            </Router.Link>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
@@ -150,7 +155,11 @@ export default function Navigation() {
                                 {dropdownItem.sub && (
                                   <button
                                     type="button"
-                                    aria-label={openSub === dropdownItem.name ? "Collapse" : "Expand"}
+                                    aria-label={
+                                      openSub === dropdownItem.name
+                                        ? "Collapse"
+                                        : "Expand"
+                                    }
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       e.preventDefault();
@@ -224,10 +233,11 @@ export default function Navigation() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
+                  asChild
                   size="sm"
                   className="bg-gradient-to-r from-solar-500 to-energy-500 hover:from-solar-600 hover:to-energy-600 text-white shadow-lg"
                 >
-                  Contact Us
+                  <Router.Link to="/contact">Contact Us</Router.Link>
                 </Button>
               </motion.div>
             </div>
