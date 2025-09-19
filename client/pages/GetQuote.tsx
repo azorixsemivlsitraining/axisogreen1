@@ -42,13 +42,18 @@ export default function GetQuote() {
         { value: "40000-50000", label: "₹40,000 - ₹50,000" },
       ];
     }
-    return domesticBillToCapacity.map((d) => ({ value: d.range, label: d.label }));
+    return domesticBillToCapacity.map((d) => ({
+      value: d.range,
+      label: d.label,
+    }));
   }, [category]);
 
   // Dynamic UI state
   const [billRange, setBillRange] = React.useState<string>("");
   const [capacityKw, setCapacityKw] = React.useState<number | "">("");
-  const [gstMode, setGstMode] = React.useState<"previous" | "current">("current");
+  const [gstMode, setGstMode] = React.useState<"previous" | "current">(
+    "current",
+  );
 
   React.useEffect(() => {
     if (category === "commercial") return;
@@ -70,14 +75,25 @@ export default function GetQuote() {
     const current = computeCurrentCost(capacityKw as number);
     const previous = Math.round(current * 0.92);
     const chosen = gstMode === "current" ? current : previous;
-    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(chosen);
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(chosen);
   }, [capacityKw, gstMode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form).entries());
-    const payload = { category, gstMode, capacityKw, billRange, estimatedCost, ...data };
+    const payload = {
+      category,
+      gstMode,
+      capacityKw,
+      billRange,
+      estimatedCost,
+      ...data,
+    };
     const submitBtn = form.querySelector(
       "button[type=submit]",
     ) as HTMLButtonElement | null;
@@ -209,12 +225,22 @@ export default function GetQuote() {
                     ))}
                   </select>
                   {billRange && category !== "commercial" && (
-                    <p className="text-xs text-muted-foreground mt-1">Suggested capacity for this bill range: {domesticBillToCapacity.find(d => d.range === billRange)?.capacity} kW</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Suggested capacity for this bill range:{" "}
+                      {
+                        domesticBillToCapacity.find(
+                          (d) => d.range === billRange,
+                        )?.capacity
+                      }{" "}
+                      kW
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Select Capacity (kW)</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Select Capacity (kW)
+                  </label>
                   <select
                     name="capacityKw"
                     value={capacityKw as any}
@@ -223,7 +249,9 @@ export default function GetQuote() {
                   >
                     <option value="">Select</option>
                     {capacityOptions.map((c) => (
-                      <option key={c} value={c}>{c} kW</option>
+                      <option key={c} value={c}>
+                        {c} kW
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -231,20 +259,39 @@ export default function GetQuote() {
                 <div>
                   <label className="block text-sm font-medium mb-1">GST</label>
                   <div className="flex gap-2">
-                    <Button type="button" variant={gstMode === "previous" ? "default" : "outline"} onClick={() => setGstMode("previous")}>Previous GST</Button>
-                    <Button type="button" variant={gstMode === "current" ? "default" : "outline"} onClick={() => setGstMode("current")}>Current GST</Button>
+                    <Button
+                      type="button"
+                      variant={gstMode === "previous" ? "default" : "outline"}
+                      onClick={() => setGstMode("previous")}
+                    >
+                      Previous GST
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={gstMode === "current" ? "default" : "outline"}
+                      onClick={() => setGstMode("current")}
+                    >
+                      Current GST
+                    </Button>
                   </div>
                 </div>
 
                 {capacityKw && (
                   <div className="p-3 rounded-lg bg-solar-50 border border-solar-100 text-sm">
-                    Estimated Cost: <span className="font-semibold text-solar-700">{estimatedCost}</span>
+                    Estimated Cost:{" "}
+                    <span className="font-semibold text-solar-700">
+                      {estimatedCost}
+                    </span>
                   </div>
                 )}
 
                 {/* Hidden fields for submission */}
                 <input type="hidden" name="gstMode" value={gstMode} />
-                <input type="hidden" name="estimatedCost" value={estimatedCost} />
+                <input
+                  type="hidden"
+                  name="estimatedCost"
+                  value={estimatedCost}
+                />
 
                 <div className="flex items-center gap-2">
                   <input id="agree" type="checkbox" name="agree" required />

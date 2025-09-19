@@ -20,11 +20,15 @@ export default function Navigation() {
       name: "Solutions",
       path: "/solutions",
       dropdown: [
-        { name: "Solar", path: "/solutions/solar", sub: [
-          { name: "Residential (B2C)", path: "/solutions/b2c" },
-          { name: "Commercial (B2B)", path: "/solutions/b2b" },
-          { name: "Government (B2G)", path: "/solutions/b2g" },
-        ] },
+        {
+          name: "Solar",
+          path: "/solutions/solar",
+          sub: [
+            { name: "Residential (B2C)", path: "/solutions/b2c" },
+            { name: "Commercial (B2B)", path: "/solutions/b2b" },
+            { name: "Government (B2G)", path: "/solutions/b2g" },
+          ],
+        },
         { name: "Wind", path: "/solutions/wind" },
         { name: "Energy Storage", path: "/solutions/storage" },
         { name: "EV Stations", path: "/solutions/ev-stations" },
@@ -60,7 +64,10 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <a href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/" className="flex items-center space-x-3">
+            <a
+              href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/"
+              className="flex items-center space-x-3"
+            >
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F59bf3e928fc9473a97d5e87470c824bb%2F661e86d7a74f464c89095a37afa49cbd?format=webp&width=800"
                 alt="AXISO Green Energy logo"
@@ -148,7 +155,11 @@ export default function Navigation() {
                                 {dropdownItem.sub && (
                                   <button
                                     type="button"
-                                    aria-label={openSub === dropdownItem.name ? "Collapse" : "Expand"}
+                                    aria-label={
+                                      openSub === dropdownItem.name
+                                        ? "Collapse"
+                                        : "Expand"
+                                    }
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       e.preventDefault();
