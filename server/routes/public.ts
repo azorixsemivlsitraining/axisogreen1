@@ -50,17 +50,24 @@ async function supabaseRequest(
 router.post("/quotes", async (req, res) => {
   try {
     const body = (req.body || {}) as Record<string, any>;
-    const allowedKeys = [
-      "name",
-      "email",
-      "phone",
-      "category",
-      "bill_range",
-      "address",
-      "message",
-    ];
-    const payload: Record<string, any> = {};
-    for (const key of allowedKeys) if (key in body) payload[key] = body[key];
+
+    // Map frontend fields to DB columns
+    const payload: Record<string, any> = {
+      name: body.name,
+      whatsapp: body.whatsapp ?? body.phone ?? null,
+      pincode: body.pincode ?? null,
+      bill: body.bill ?? body.billRange ?? body.bill_range ?? null,
+      category: body.category ?? null,
+      metadata: {
+        gstMode: body.gstMode ?? null,
+        capacityKw: body.capacityKw ?? null,
+        estimatedCost: body.estimatedCost ?? null,
+        address: body.address ?? null,
+        message: body.message ?? null,
+        source: "public-form",
+      },
+    };
+
     const result = await supabaseRequest("quotes", "POST", payload);
     return res.status(201).json(result);
   } catch (err: any) {
