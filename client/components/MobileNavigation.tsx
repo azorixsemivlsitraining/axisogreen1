@@ -86,11 +86,6 @@ export default function MobileNavigation() {
       icon: Building,
     },
     {
-      title: "Resources",
-      href: "/resources",
-      icon: FileText,
-    },
-    {
       title: "Careers",
       href: "/careers",
       icon: Briefcase,
@@ -99,11 +94,6 @@ export default function MobileNavigation() {
       title: "About",
       href: "/about",
       icon: Users,
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-      icon: Phone,
     },
   ];
 
