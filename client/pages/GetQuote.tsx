@@ -29,7 +29,7 @@ export default function GetQuote() {
     { range: "3500-4500", label: "₹3,500 - ₹4,500", capacity: 5 },
     { range: "4501-5500", label: "₹4,501 - ₹5,500", capacity: 6 },
     { range: "5501-6500", label: "₹5,501 - ₹6,500", capacity: 7 },
-    { range: "6501-7500", label: "₹6,501 - ₹7,500", capacity: 8 },
+    { range: "6501-7500", label: "���6,501 - ₹7,500", capacity: 8 },
     { range: "7501-10500", label: "₹7,501 - ₹10,500", capacity: 10 },
   ];
 
@@ -47,7 +47,6 @@ export default function GetQuote() {
 
   // Dynamic UI state
   const [billRange, setBillRange] = React.useState<string>("");
-  const [billAmount, setBillAmount] = React.useState<string>("");
   const [capacityKw, setCapacityKw] = React.useState<number | "">("");
   const [gstMode, setGstMode] = React.useState<"previous" | "current">("current");
 
@@ -78,7 +77,7 @@ export default function GetQuote() {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form).entries());
-    const payload = { category, gstMode, capacityKw, billAmount, billRange, estimatedCost, ...data };
+    const payload = { category, gstMode, capacityKw, billRange, estimatedCost, ...data };
     const submitBtn = form.querySelector(
       "button[type=submit]",
     ) as HTMLButtonElement | null;
@@ -212,11 +211,6 @@ export default function GetQuote() {
                   {billRange && category !== "commercial" && (
                     <p className="text-xs text-muted-foreground mt-1">Suggested capacity for this bill range: {domesticBillToCapacity.find(d => d.range === billRange)?.capacity} kW</p>
                   )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">Current Monthly Bill (₹)</label>
-                  <Input name="billAmount" inputMode="numeric" value={billAmount} onChange={(e) => setBillAmount(e.target.value)} />
                 </div>
 
                 <div>
