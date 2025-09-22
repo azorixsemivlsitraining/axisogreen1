@@ -13,7 +13,6 @@ import {
   Zap,
   Truck,
   Hospital,
-  ShoppingCart,
   ArrowRight,
   CheckCircle,
   TrendingUp,
