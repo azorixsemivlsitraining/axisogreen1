@@ -16,10 +16,12 @@ import {
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export default function SlidingHeroSection() {
   const ref = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -27,6 +29,18 @@ export default function SlidingHeroSection() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Hero gallery images (provided by client)
+  const heroImages = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F31511583a0bf47cbac17e9b0a6ba7540?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff7ce032612c5498295baa33ffba37099?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdcd6b34456de4036807c67a6c9204668?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff2f741599e214ed18cbf4fe15b9a22bb?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F0c65c8f98b434f6fa3e56549998067c6?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdbef869499544752866057ac9194e8ed?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ffadfc97438934d1f879226e9ef0a7f52?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F7a0c784efd084521887758d90c4b2346?format=webp&width=1200",
+  ];
 
   const slides = [
     {
@@ -73,6 +87,14 @@ export default function SlidingHeroSection() {
 
     return () => clearInterval(timer);
   }, [slides.length]);
+
+  // Auto-cycle gallery images
+  useEffect(() => {
+    const t = setInterval(() => {
+      setImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(t);
+  }, [heroImages.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -223,14 +245,28 @@ export default function SlidingHeroSection() {
                     }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="group border-2 border-solar-300 hover:border-solar-500 text-lg px-8 py-4 h-auto backdrop-blur-sm hover:bg-solar-50"
-                    >
-                      <Play className="mr-2 h-5 w-5" />
-                      Watch Demo
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="group border-2 border-solar-300 hover:border-solar-500 text-lg px-8 py-4 h-auto backdrop-blur-sm hover:bg-solar-50"
+                        >
+                          <Play className="mr-2 h-5 w-5" />
+                          Watch Demo
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                        <div className="aspect-video w-full">
+                          <video
+                            src="https://cdn.builder.io/o/assets%2F5c07bd532d434c36b4bb2918deeee627%2F205577c966ca49548f2f62dd4b413937?alt=media&token=47e7cbe2-8267-462c-8d59-aa55ba3a3ce6&apiKey=5c07bd532d434c36b4bb2918deeee627"
+                            controls
+                            autoPlay
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </motion.div>
                 </motion.div>
 
@@ -273,7 +309,7 @@ export default function SlidingHeroSection() {
             </AnimatePresence>
           </div>
 
-          {/* Right content - Sliding Images */}
+          {/* Right content - Animated Image Gallery with glass overlay */}
           <motion.div
             className="relative h-[600px] lg:h-[700px]"
             initial={{ opacity: 0, x: 50 }}
@@ -282,55 +318,30 @@ export default function SlidingHeroSection() {
           >
             <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, scale: 1.1 }}
+                <motion.img
+                  key={imageIndex}
+                  src={heroImages[imageIndex]}
+                  alt="Axiso project"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
+                  exit={{ opacity: 0.2, scale: 1.02 }}
                   transition={{ duration: 0.8 }}
-                  className="absolute inset-0"
-                >
-                  {/* Image with Solar Pattern */}
-                  <div
-                    className={`w-full h-full bg-gradient-to-br ${currentSlideData.gradient} relative overflow-hidden`}
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 20,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      >
-                        <CurrentIcon className="w-32 h-32 text-white/30" />
-                      </motion.div>
-                    </div>
-
-                    {/* Solar Panel Grid Overlay */}
-                    <div
-                      className={
-                        'absolute inset-0 bg-[url(\'data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="white" fill-opacity="0.1"%3E%3Crect x="10" y="10" width="35" height="20" rx="2"/%3E%3Crect x="55" y="10" width="35" height="20" rx="2"/%3E%3Crect x="10" y="40" width="35" height="20" rx="2"/%3E%3Crect x="55" y="40" width="35" height="20" rx="2"/%3E%3Crect x="10" y="70" width="35" height="20" rx="2"/%3E%3Crect x="55" y="70" width="35" height="20" rx="2"/%3E%3C/g%3E%3C/svg%3E\')] opacity-50'
-                      }
-                    />
-
-                    {/* Caption Overlay */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
-                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-white"
-                    >
-                      <h3 className="text-2xl font-bold mb-2">
-                        {currentSlideData.subtitle}
-                      </h3>
-                      <p className="text-white/90 text-sm leading-relaxed">
-                        {currentSlideData.description.substring(0, 120)}...
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
+                />
               </AnimatePresence>
+
+              {/* Glassmorphism caption card (like reference) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute bottom-6 left-6 right-6 bg-white/25 backdrop-blur-xl border border-white/30 rounded-2xl p-6 text-white shadow-xl"
+              >
+                <h3 className="text-xl font-bold mb-1">Clean Energy Leadership</h3>
+                <p className="text-white/90 text-sm">
+                  Leading the transition to renewable energy with innovative solutions that protect our planet for future generations.
+                </p>
+              </motion.div>
             </div>
 
             {/* Navigation Controls */}
