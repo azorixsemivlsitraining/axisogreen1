@@ -219,7 +219,6 @@ export default function Sectors() {
               transition={{ duration: 0.8 }}
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm text-green-600 rounded-full text-sm font-medium mb-8 border border-green-500/20"
             >
-              <Building className="w-4 h-4 mr-2" />
               Sectors We Serve
             </motion.div>
 
@@ -289,41 +288,6 @@ export default function Sectors() {
           </div>
         </motion.div>
 
-        {/* Circular Floating Icons */}
-        <div className="absolute inset-0">
-          {sectors.map((sector, index) => {
-            const angle = (index / sectors.length) * 2 * Math.PI;
-            const radius = 300;
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
-
-            return (
-              <motion.div
-                key={index}
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                }}
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              >
-                <motion.div
-                  className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${sector.color} shadow-lg flex items-center justify-center`}
-                  whileHover={{ scale: 1.2, rotate: 180 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <sector.icon className="w-10 h-10 text-white" />
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </div>
       </section>
 
       {/* Sectors Grid */}
