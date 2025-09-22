@@ -22,7 +22,7 @@ export default function AboutAnimatedHero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const gallery = [
+  const baseGallery = [
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F31511583a0bf47cbac17e9b0a6ba7540?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff7ce032612c5498295baa33ffba37099?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdcd6b34456de4036807c67a6c9204668?format=webp&width=1200",
@@ -32,6 +32,14 @@ export default function AboutAnimatedHero() {
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ffadfc97438934d1f879226e9ef0a7f52?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F7a0c784efd084521887758d90c4b2346?format=webp&width=1200",
   ];
+  const removeSet = new Set([
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F47492e7ccdcf4219a35fd0948d46120d?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe0bf12985a064d7c884bafc93c0f7237?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F49b0b1bb88dc45a6987bc809295d0206?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F77dd36b975ca431a870392e1e863fc0d?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff671c324bf734df1a355b4123cd0ad13?format=webp&width=1200",
+  ]);
+  const gallery = baseGallery.filter((u) => !removeSet.has(u));
 
   const slides = [
     {
@@ -112,94 +120,6 @@ export default function AboutAnimatedHero() {
         className="opacity-30"
       />
 
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        {/* Animated Background Elements based on current slide */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0"
-          >
-            {currentSlideData.animation === "vision" && (
-              <>
-                {/* Target Rings for Vision */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute top-1/2 left-1/2 border-2 border-solar-300/20 rounded-full"
-                    style={{
-                      width: `${(i + 1) * 100}px`,
-                      height: `${(i + 1) * 100}px`,
-                      marginLeft: `-${(i + 1) * 50}px`,
-                      marginTop: `-${(i + 1) * 50}px`,
-                    }}
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: i * 0.5,
-                    }}
-                  />
-                ))}
-              </>
-            )}
-
-            {currentSlideData.animation === "mission" && (
-              <>
-                {/* Heart Pulse for Mission */}
-                <motion.div
-                  className="absolute top-20 right-20 w-24 h-24"
-                  animate={{
-                    scale: [1, 1.3, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Heart className="w-24 h-24 text-energy-400/30 fill-current" />
-                </motion.div>
-              </>
-            )}
-
-            {currentSlideData.animation === "values" && (
-              <>
-                {/* Award Stars for Values */}
-                {[...Array(6)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-6 h-6"
-                    style={{
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${10 + Math.random() * 80}%`,
-                    }}
-                    animate={{
-                      rotate: [0, 360],
-                      scale: [0.5, 1, 0.5],
-                      opacity: [0.3, 1, 0.3],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i * 0.8,
-                    }}
-                  >
-                    <Award className="w-6 h-6 text-solar-400/40" />
-                  </motion.div>
-                ))}
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
 
       <motion.div
         style={{ y, opacity }}
