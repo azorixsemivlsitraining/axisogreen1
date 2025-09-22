@@ -31,7 +31,7 @@ export default function SlidingHeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   // Hero gallery images (provided by client)
-  const heroImages = [
+  const baseHeroImages = [
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F31511583a0bf47cbac17e9b0a6ba7540?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff7ce032612c5498295baa33ffba37099?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdcd6b34456de4036807c67a6c9204668?format=webp&width=1200",
@@ -41,6 +41,14 @@ export default function SlidingHeroSection() {
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ffadfc97438934d1f879226e9ef0a7f52?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F7a0c784efd084521887758d90c4b2346?format=webp&width=1200",
   ];
+  const excludeUrls = new Set([
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F47492e7ccdcf4219a35fd0948d46120d?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe0bf12985a064d7c884bafc93c0f7237?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F49b0b1bb88dc45a6987bc809295d0206?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F77dd36b975ca431a870392e1e863fc0d?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff671c324bf734df1a355b4123cd0ad13?format=webp&width=1200",
+  ]);
+  const heroImages = baseHeroImages.filter((u) => !excludeUrls.has(u));
 
   const slides = [
     {
@@ -123,43 +131,7 @@ export default function SlidingHeroSection() {
         className="opacity-40"
       />
 
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        {/* Animated Sun */}
-        <motion.div
-          className="absolute top-20 right-20 w-32 h-32 rounded-full bg-gradient-to-br from-solar-400 to-energy-500 opacity-20"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Solar Rays */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute top-24 right-24 w-1 h-20 bg-gradient-to-b from-solar-400 to-transparent origin-bottom"
-            style={{
-              transform: `rotate(${i * 45}deg)`,
-            }}
-            animate={{
-              opacity: [0.3, 0.8, 0.3],
-              scaleY: [0.8, 1.2, 0.8],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.2,
-            }}
-          />
-        ))}
-      </div>
-
+    
       <motion.div
         style={{ y, opacity }}
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10"
