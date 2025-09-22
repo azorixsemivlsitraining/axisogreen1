@@ -125,7 +125,7 @@ export default function Sectors() {
       title: "Retail & Hospitality",
       description:
         "Energy management solutions for retail chains, hotels, and hospitality businesses",
-      icon: ShoppingCart,
+      icon: Building,
       color: "from-indigo-500 to-indigo-600",
       projects: "120+",
       savings: "25-40%",
