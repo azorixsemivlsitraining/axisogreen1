@@ -38,6 +38,8 @@ export default function AboutAnimatedHero() {
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F49b0b1bb88dc45a6987bc809295d0206?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F77dd36b975ca431a870392e1e863fc0d?format=webp&width=1200",
     "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff671c324bf734df1a355b4123cd0ad13?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fa43b35eb839444f3861d83694fc86dfd?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fc7f82419ad114e0baa3a75b074f2233d?format=webp&width=1200",
   ]);
   const gallery = baseGallery.filter((u) => !removeSet.has(u));
 
