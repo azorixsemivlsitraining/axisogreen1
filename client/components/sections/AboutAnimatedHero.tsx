@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export default function AboutAnimatedHero() {
   const ref = useRef(null);
@@ -298,6 +298,10 @@ export default function AboutAnimatedHero() {
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                        <DialogHeader className="sr-only">
+                          <DialogTitle>Our Story</DialogTitle>
+                          <DialogDescription>About Axiso Green Energy video</DialogDescription>
+                        </DialogHeader>
                         <div className="aspect-video w-full">
                           <video
                             src="https://cdn.builder.io/o/assets%2F5c07bd532d434c36b4bb2918deeee627%2F9534ea4faebe4071976effc1ce08eec0?alt=media&token=7abcbb20-91b3-49c3-be8d-fa5b0d81725a&apiKey=5c07bd532d434c36b4bb2918deeee627"
