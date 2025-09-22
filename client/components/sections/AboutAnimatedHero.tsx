@@ -8,10 +8,12 @@ import {
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export default function AboutAnimatedHero() {
   const ref = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -19,6 +21,17 @@ export default function AboutAnimatedHero() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const gallery = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F31511583a0bf47cbac17e9b0a6ba7540?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff7ce032612c5498295baa33ffba37099?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdcd6b34456de4036807c67a6c9204668?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff2f741599e214ed18cbf4fe15b9a22bb?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F0c65c8f98b434f6fa3e56549998067c6?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdbef869499544752866057ac9194e8ed?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ffadfc97438934d1f879226e9ef0a7f52?format=webp&width=1200",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F7a0c784efd084521887758d90c4b2346?format=webp&width=1200",
+  ];
 
   const slides = [
     {
@@ -68,6 +81,13 @@ export default function AboutAnimatedHero() {
 
     return () => clearInterval(timer);
   }, [slides.length]);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setImageIndex((p) => (p + 1) % gallery.length);
+    }, 4000);
+    return () => clearInterval(t);
+  }, [gallery.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -266,14 +286,28 @@ export default function AboutAnimatedHero() {
                     }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="group border-2 border-solar-300 hover:border-solar-500 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4 h-auto backdrop-blur-sm hover:bg-solar-50 w-full sm:w-auto"
-                    >
-                      <Play className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
-                      Our Story
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="group border-2 border-solar-300 hover:border-solar-500 text-base lg:text-lg px-6 lg:px-8 py-3 lg:py-4 h-auto backdrop-blur-sm hover:bg-solar-50 w-full sm:w-auto"
+                        >
+                          <Play className="mr-2 h-4 w-4 lg:h-5 lg:w-5" />
+                          Our Story
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                        <div className="aspect-video w-full">
+                          <video
+                            src="https://cdn.builder.io/o/assets%2F5c07bd532d434c36b4bb2918deeee627%2F9534ea4faebe4071976effc1ce08eec0?alt=media&token=7abcbb20-91b3-49c3-be8d-fa5b0d81725a&apiKey=5c07bd532d434c36b4bb2918deeee627"
+                            controls
+                            autoPlay
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </motion.div>
                 </motion.div>
 
@@ -316,7 +350,7 @@ export default function AboutAnimatedHero() {
             </AnimatePresence>
           </div>
 
-          {/* Right content - Team/Company Visual */}
+          {/* Right content - Animated Image Gallery */}
           <motion.div
             className="relative h-[400px] sm:h-[500px] lg:h-[600px] xl:h-[700px] order-1 lg:order-2"
             initial={{ opacity: 0, x: 50 }}
@@ -325,69 +359,31 @@ export default function AboutAnimatedHero() {
           >
             <div className="relative w-full h-full rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, scale: 1.1 }}
+                <motion.img
+                  key={imageIndex}
+                  src={gallery[imageIndex]}
+                  alt="Axiso gallery"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
+                  exit={{ opacity: 0.2, scale: 1.02 }}
                   transition={{ duration: 0.8 }}
-                  className="absolute inset-0"
-                >
-                  {/* Dynamic Visual based on slide */}
-                  <div
-                    className={`w-full h-full bg-gradient-to-br ${currentSlideData.gradient} relative overflow-hidden`}
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        animate={{
-                          rotate:
-                            currentSlideData.animation === "vision"
-                              ? [0, 360]
-                              : 0,
-                          scale:
-                            currentSlideData.animation === "mission"
-                              ? [1, 1.1, 1]
-                              : 1,
-                          y:
-                            currentSlideData.animation === "values"
-                              ? [0, -10, 0]
-                              : 0,
-                        }}
-                        transition={{
-                          duration:
-                            currentSlideData.animation === "vision" ? 20 : 3,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      >
-                        <CurrentIcon className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 text-white/30" />
-                      </motion.div>
-                    </div>
-
-                    {/* Overlay Pattern */}
-                    <div
-                      className={
-                        'absolute inset-0 bg-[url(\'data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="white" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="20"/%3E%3Ccircle cx="10" cy="10" r="8"/%3E%3Ccircle cx="50" cy="50" r="8"/%3E%3C/g%3E%3C/svg%3E\')] opacity-50'
-                      }
-                    />
-
-                    {/* Caption Overlay */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
-                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6 lg:p-8 text-white"
-                    >
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">
-                        {currentSlideData.subtitle}
-                      </h3>
-                      <p className="text-white/90 text-sm sm:text-base leading-relaxed">
-                        {currentSlideData.description.substring(0, 100)}...
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
+                />
               </AnimatePresence>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute bottom-4 left-4 right-4 bg-white/25 backdrop-blur-xl border border-white/30 rounded-2xl p-4 sm:p-6 text-white shadow-xl"
+              >
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-1">
+                  Clean Energy Leadership
+                </h3>
+                <p className="text-white/90 text-xs sm:text-sm">
+                  Leading the transition to renewable energy with innovative solutions that protect our planet for future generations.
+                </p>
+              </motion.div>
             </div>
 
             {/* Navigation Dots - Mobile Friendly */}
