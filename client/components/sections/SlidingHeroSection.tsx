@@ -334,18 +334,6 @@ export default function SlidingHeroSection() {
                 />
               </AnimatePresence>
 
-              {/* Glassmorphism caption card (like reference) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute bottom-6 left-6 right-6 bg-white/25 backdrop-blur-xl border border-white/30 rounded-2xl p-6 text-white shadow-xl"
-              >
-                <h3 className="text-xl font-bold mb-1">Clean Energy Leadership</h3>
-                <p className="text-white/90 text-sm">
-                  Leading the transition to renewable energy with innovative solutions that protect our planet for future generations.
-                </p>
-              </motion.div>
             </div>
 
             {/* Navigation Controls */}
@@ -387,48 +375,7 @@ export default function SlidingHeroSection() {
                 <ChevronRight className="w-6 h-6 text-foreground" />
               </motion.button>
             </div>
-
-            {/* Floating Elements */}
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className={`absolute w-20 h-20 rounded-2xl shadow-lg ${
-                  i === 0
-                    ? "bg-solar-400/20 -top-6 -right-6"
-                    : i === 1
-                      ? "bg-energy-400/20 -bottom-6 -left-6"
-                      : "bg-sky-400/20 top-1/2 -left-12"
-                }`}
-                animate={{
-                  y: [0, -15, 0],
-                  rotateX: [0, 180, 360],
-                  rotateY: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 4 + i,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.5,
-                }}
-                style={{ transformStyle: "preserve-3d" }}
-              />
-            ))}
           </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-solar-500/50 rounded-full flex justify-center">
-          <motion.div
-            className="w-1 h-3 bg-solar-500 rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
         </div>
       </motion.div>
     </section>
