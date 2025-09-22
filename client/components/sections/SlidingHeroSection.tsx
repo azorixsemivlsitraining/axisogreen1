@@ -16,7 +16,14 @@ import {
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
-import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export default function SlidingHeroSection() {
   const ref = useRef(null);
@@ -121,7 +128,6 @@ export default function SlidingHeroSection() {
         className="opacity-40"
       />
 
-    
       <motion.div
         style={{ y, opacity }}
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10"
@@ -221,7 +227,9 @@ export default function SlidingHeroSection() {
                       <DialogContent className="max-w-4xl p-0 overflow-hidden">
                         <DialogHeader className="sr-only">
                           <DialogTitle>Watch Demo</DialogTitle>
-                          <DialogDescription>Axiso Green Energy product demo video</DialogDescription>
+                          <DialogDescription>
+                            Axiso Green Energy product demo video
+                          </DialogDescription>
                         </DialogHeader>
                         <div className="aspect-video w-full">
                           <video
@@ -295,7 +303,6 @@ export default function SlidingHeroSection() {
                   transition={{ duration: 0.8 }}
                 />
               </AnimatePresence>
-
             </div>
 
             {/* Navigation Controls */}

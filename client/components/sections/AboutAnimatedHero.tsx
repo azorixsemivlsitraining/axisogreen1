@@ -8,7 +8,14 @@ import {
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
-import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export default function AboutAnimatedHero() {
   const ref = useRef(null);
@@ -111,7 +118,6 @@ export default function AboutAnimatedHero() {
         className="opacity-30"
       />
 
-
       <motion.div
         style={{ y, opacity }}
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10"
@@ -211,7 +217,9 @@ export default function AboutAnimatedHero() {
                       <DialogContent className="max-w-4xl p-0 overflow-hidden">
                         <DialogHeader className="sr-only">
                           <DialogTitle>Our Story</DialogTitle>
-                          <DialogDescription>About Axiso Green Energy video</DialogDescription>
+                          <DialogDescription>
+                            About Axiso Green Energy video
+                          </DialogDescription>
                         </DialogHeader>
                         <div className="aspect-video w-full">
                           <video
@@ -330,7 +338,6 @@ export default function AboutAnimatedHero() {
           </motion.div>
         </div>
       </motion.div>
-
     </section>
   );
 }

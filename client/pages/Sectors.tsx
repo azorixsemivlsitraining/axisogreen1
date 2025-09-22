@@ -287,7 +287,6 @@ export default function Sectors() {
             </motion.div>
           </div>
         </motion.div>
-
       </section>
 
       {/* Sectors Grid */}
