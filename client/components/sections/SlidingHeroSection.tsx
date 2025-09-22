@@ -30,27 +30,15 @@ export default function SlidingHeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // Hero gallery images (provided by client)
-  const baseHeroImages = [
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F31511583a0bf47cbac17e9b0a6ba7540?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff7ce032612c5498295baa33ffba37099?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdcd6b34456de4036807c67a6c9204668?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff2f741599e214ed18cbf4fe15b9a22bb?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F0c65c8f98b434f6fa3e56549998067c6?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fdbef869499544752866057ac9194e8ed?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ffadfc97438934d1f879226e9ef0a7f52?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F7a0c784efd084521887758d90c4b2346?format=webp&width=1200",
+  // Hero gallery images: provided by client (home)
+  const heroImages = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F703dbd6539b7421ebd2c050e083f2492?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fd976de95872e405f9cc8d4108a486435?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F3fc794dad0074c0cad933196f0dc3dc2?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F60a19bcdb943491bad62705dff9d2d13?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fc7ee6808def1461f89c8b5ed7c14196d?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F077ca009c32541c7b3d2c0d0bf3802fb?format=webp&width=800",
   ];
-  const excludeUrls = new Set([
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F47492e7ccdcf4219a35fd0948d46120d?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe0bf12985a064d7c884bafc93c0f7237?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F49b0b1bb88dc45a6987bc809295d0206?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F77dd36b975ca431a870392e1e863fc0d?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff671c324bf734df1a355b4123cd0ad13?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fa43b35eb839444f3861d83694fc86dfd?format=webp&width=1200",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fc7f82419ad114e0baa3a75b074f2233d?format=webp&width=1200",
-  ]);
-  const heroImages = baseHeroImages.filter((u) => !excludeUrls.has(u));
 
   const slides = [
     {
