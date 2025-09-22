@@ -374,20 +374,6 @@ export default function AboutAnimatedHero() {
                   transition={{ duration: 0.8 }}
                 />
               </AnimatePresence>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute bottom-4 left-4 right-4 bg-white/25 backdrop-blur-xl border border-white/30 rounded-2xl p-4 sm:p-6 text-white shadow-xl"
-              >
-                <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-1">
-                  Clean Energy Leadership
-                </h3>
-                <p className="text-white/90 text-xs sm:text-sm">
-                  Leading the transition to renewable energy with innovative solutions that protect our planet for future generations.
-                </p>
-              </motion.div>
             </div>
 
             {/* Navigation Dots - Mobile Friendly */}
@@ -434,20 +420,6 @@ export default function AboutAnimatedHero() {
         </div>
       </motion.div>
 
-      {/* Mobile-Friendly Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-5 h-8 lg:w-6 lg:h-10 border-2 border-solar-500/50 rounded-full flex justify-center">
-          <motion.div
-            className="w-1 h-2 lg:h-3 bg-solar-500 rounded-full mt-1 lg:mt-2"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }
