@@ -16,7 +16,7 @@ import {
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export default function SlidingHeroSection() {
   const ref = useRef(null);
@@ -257,6 +257,10 @@ export default function SlidingHeroSection() {
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                        <DialogHeader className="sr-only">
+                          <DialogTitle>Watch Demo</DialogTitle>
+                          <DialogDescription>Axiso Green Energy product demo video</DialogDescription>
+                        </DialogHeader>
                         <div className="aspect-video w-full">
                           <video
                             src="https://cdn.builder.io/o/assets%2F5c07bd532d434c36b4bb2918deeee627%2F205577c966ca49548f2f62dd4b413937?alt=media&token=47e7cbe2-8267-462c-8d59-aa55ba3a3ce6&apiKey=5c07bd532d434c36b4bb2918deeee627"
