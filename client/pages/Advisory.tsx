@@ -476,8 +476,8 @@ export default function Advisory() {
                 >
                   <Button
                     size="lg"
-                    variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-primary"
+                    variant="secondary"
+                    className="group"
                   >
                     Download Service Guide
                   </Button>
