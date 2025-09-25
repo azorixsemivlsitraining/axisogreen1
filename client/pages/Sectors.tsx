@@ -230,7 +230,7 @@ export default function Sectors() {
             >
               <span className="block">Powering</span>
               <motion.span
-                className="block bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent  pb-5"
+                className="block bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent  pb-3"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
