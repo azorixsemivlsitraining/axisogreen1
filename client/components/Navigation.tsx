@@ -69,9 +69,9 @@ export default function Navigation() {
               className="flex items-center space-x-3"
             >
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F59bf3e928fc9473a97d5e87470c824bb%2F661e86d7a74f464c89095a37afa49cbd?format=webp&width=800"
+                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F01ca884586554368aad115cf4aa82027?format=webp&width=800"
                 alt="AXISO Green Energy logo"
-                className="h-[66px] w-auto object-contain"
+                className="h-[74px] w-auto object-contain filter brightness-110 contrast-125 drop-shadow-md"
                 loading="eager"
                 decoding="async"
               />
