@@ -21,14 +21,14 @@ const prices = [
 
 export default function Contact() {
   const [selectedGST, setSelectedGST] = React.useState<"prev" | "current">(
-    "current"
+    "current",
   );
   const [selectedPrice, setSelectedPrice] = React.useState(prices[0].current);
 
   const handleSelect = (price: number, type: "prev" | "current") => {
     setSelectedGST(type);
     setSelectedPrice(
-      type === "prev" ? price + 5000 : price // prev is +5000
+      type === "prev" ? price + 5000 : price, // prev is +5000
     );
   };
 
@@ -38,7 +38,7 @@ export default function Contact() {
     const data = Object.fromEntries(new FormData(form).entries());
 
     const btn = form.querySelector(
-      "button[type=submit]"
+      "button[type=submit]",
     ) as HTMLButtonElement | null;
     try {
       if (btn) {
@@ -82,7 +82,6 @@ export default function Contact() {
             Get in touch with our renewable energy experts for a free
             consultation.
           </p>
-
 
           {/* Contact Form */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
@@ -133,7 +132,8 @@ export default function Contact() {
                 className="w-full h-full object-cover rounded-xl border shadow-lg"
                 loading="lazy"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = "/placeholder.svg";
+                  (e.currentTarget as HTMLImageElement).src =
+                    "/placeholder.svg";
                 }}
               />
             </aside>
