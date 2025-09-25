@@ -69,7 +69,7 @@ export default function Footer() {
                 decoding="async"
               />
               <span className="mt-3 text-xl font-bold text-white">
-                AXIS Green Energy
+                AXISO Green Energies
               </span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-sm">
