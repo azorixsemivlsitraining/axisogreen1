@@ -290,12 +290,9 @@ export default function AnimatedSolutionsSection() {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
+              <Button size="lg" variant="secondary" className="group">
                 Download Brochure
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
           </motion.div>
