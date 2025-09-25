@@ -159,7 +159,7 @@ export default function SlidingHeroSection() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-8 leading-tight break-words"
+                  className={`text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-8 leading-tight break-words ${currentSlideData.titleClass ?? ""}`}
                 >
                   <motion.span
                     className={`block bg-gradient-to-r ${currentSlideData.gradient} bg-clip-text text-transparent`}
