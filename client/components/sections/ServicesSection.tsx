@@ -135,7 +135,7 @@ export default function ServicesSection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-primary"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               Download Brochure
             </Button>
