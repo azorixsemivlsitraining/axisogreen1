@@ -69,7 +69,7 @@ export default function SlidingHeroSection() {
       stats: { automation: "100%", reduction: "35%", uptime: "99.9%" },
       cta: "Smart Solutions",
       gradient: "from-sky-400 via-solar-500 to-energy-600",
-      titleClass: "mb-6 pb-2",
+      titleClass: "mb-6 pb-3 leading-[1.18] md:leading-[1.14] lg:leading-[1.12]",
     },
     {
       id: 3,
