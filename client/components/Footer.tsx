@@ -62,7 +62,7 @@ export default function Footer() {
               className="flex flex-col items-start mb-6 select-none"
             >
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fd38d8994b82843fc95a9ead987fdb0de?format=webp&width=800"
+                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe9b318f844124426beb12ccd67e6243b?format=webp&width=800"
                 alt="AXIS Green Energy logo"
                 className="h-[90px] md:h-[96px] w-auto object-contain select-none"
                 loading="lazy"
