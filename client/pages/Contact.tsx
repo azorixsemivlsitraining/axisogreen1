@@ -21,14 +21,14 @@ const prices = [
 
 export default function Contact() {
   const [selectedGST, setSelectedGST] = React.useState<"prev" | "current">(
-    "current"
+    "current",
   );
   const [selectedPrice, setSelectedPrice] = React.useState(prices[0].current);
 
   const handleSelect = (price: number, type: "prev" | "current") => {
     setSelectedGST(type);
     setSelectedPrice(
-      type === "prev" ? price + 5000 : price // prev is +5000
+      type === "prev" ? price + 5000 : price, // prev is +5000
     );
   };
 
@@ -38,7 +38,7 @@ export default function Contact() {
     const data = Object.fromEntries(new FormData(form).entries());
 
     const btn = form.querySelector(
-      "button[type=submit]"
+      "button[type=submit]",
     ) as HTMLButtonElement | null;
     try {
       if (btn) {
@@ -82,7 +82,6 @@ export default function Contact() {
             Get in touch with our renewable energy experts for a free
             consultation.
           </p>
-
 
           {/* Contact Form */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
@@ -133,10 +132,27 @@ export default function Contact() {
                 className="w-full h-full object-cover rounded-xl border shadow-lg"
                 loading="lazy"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = "/placeholder.svg";
+                  (e.currentTarget as HTMLImageElement).src =
+                    "/placeholder.svg";
                 }}
               />
             </aside>
+          </div>
+        </section>
+
+        {/* Map Location */}
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-green-100">
+            <iframe
+              title="Axiso Green Energy Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.241372001067!2d78.339070175912!3d17.495987599666098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9339b0a17839%3A0x3426f99387651e26!2sAxiso%20Green%20Energy!5e0!3m2!1sen!2sin!4v1758781678550!5m2!1sen!2sin"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </section>
       </main>

@@ -69,7 +69,7 @@ export default function SlidingHeroSection() {
       stats: { automation: "100%", reduction: "35%", uptime: "99.9%" },
       cta: "Smart Solutions",
       gradient: "from-sky-400 via-solar-500 to-energy-600",
-      titleClass: "mb-6 pb-2",
+      titleClass: "mb-6  leading-[1.4] md:leading-[1.35] lg:leading-[1.32]",
     },
     {
       id: 3,
@@ -159,7 +159,7 @@ export default function SlidingHeroSection() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-8 leading-tight break-words"
+                  className={`text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-8 leading-tight break-words ${currentSlideData.titleClass ?? ""}`}
                 >
                   <motion.span
                     className={`block bg-gradient-to-r ${currentSlideData.gradient} bg-clip-text text-transparent`}
