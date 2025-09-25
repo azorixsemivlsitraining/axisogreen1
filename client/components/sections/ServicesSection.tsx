@@ -132,12 +132,9 @@ export default function ServicesSection() {
               Schedule Consultation
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="group"
-            >
+            <Button size="lg" variant="secondary" className="group">
               Download Brochure
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
         </div>
