@@ -202,7 +202,7 @@ export default function FinalCTASection() {
                 <ArrowRight className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
-              <p className="opacity-90">123 Green Energy Blvd</p>
+              <p className="opacity-90">Flat No 101, Manish Residency, Sri Durga Colony,<br></br> Madeenaguda, Miyapur, Hyderabad, Telangana 500049</p>
             </motion.div>
           </motion.div>
 
