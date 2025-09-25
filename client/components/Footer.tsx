@@ -63,13 +63,13 @@ export default function Footer() {
             >
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe9b318f844124426beb12ccd67e6243b?format=webp&width=800"
-                alt="AXISO Green Energies logo"
-                className="h-[90px] md:h-[96px] w-auto object-contain select-none"
+                alt="AXIS Green Energy logo"
+                className="h-[110px] md:h-[120px] w-auto object-contain filter brightness-110 contrast-125 saturate-125 drop-shadow-md select-none"
                 loading="lazy"
                 decoding="async"
               />
               <span className="mt-3 text-xl font-bold text-white">
-                AXISO Green Energies
+                AXIS Green Energy
               </span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-sm">
