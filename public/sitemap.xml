@@ -3,8 +3,26 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  <url>
-    <loc>https://www.axisogreen.in/</loc>
-    <lastmod>2025-09-25T10:22:05+00:00</lastmod>
-  </url>
+  <url><loc>https://www.axisogreen.in/</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/about</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/contact</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/advisory</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/procurement</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/digital-solutions</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/sectors</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/resources</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/careers</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/get-quote</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/solar</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/wind</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/storage</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/ev-stations</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/b2b</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/b2c</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/solutions/b2g</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/privacy</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/terms</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/cookies</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
+  <url><loc>https://www.axisogreen.in/compliance</loc><lastmod>2025-09-25T10:22:05+00:00</lastmod></url>
 </urlset>
