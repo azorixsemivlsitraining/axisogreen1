@@ -33,63 +33,64 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import Compliance from "./pages/Compliance";
+import { SEOProvider } from "./components/SEOProvider";
 
 const queryClient = new QueryClient();
 
-// 👇 Helper hook for tracking page views
-function usePageTracking() {
+// Page view tracker mounted under Router to access useLocation
+function PageTracker() {
   const location = useLocation();
-
   useEffect(() => {
-    if (window.gtag) {
-      window.gtag("config", "G-JLJVRZ4V16", {
+    if ((window as any).gtag) {
+      (window as any).gtag("config", "G-JLJVRZ4V16", {
         page_path: location.pathname + location.search,
       });
     }
   }, [location]);
+  return null;
 }
 
-const App = () => {
-  usePageTracking(); // 👈 Track page views
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/advisory" element={<Advisory />} />
-            <Route path="/procurement" element={<Procurement />} />
-            <Route path="/digital-solutions" element={<DigitalSolutions />} />
-            <Route path="/sectors" element={<Sectors />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/get-quote" element={<GetQuote />} />
-            <Route path="/solutions/solar" element={<Solar />} />
-            <Route path="/solutions/wind" element={<Wind />} />
-            <Route path="/solutions/storage" element={<Storage />} />
-            <Route path="/solutions/ev-stations" element={<EVStations />} />
-            <Route path="/solutions/b2b" element={<B2B />} />
-            <Route path="/solutions/b2c" element={<B2C />} />
-            <Route path="/solutions/b2g" element={<B2G />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/cookies" element={<Cookies />} />
-            <Route path="/compliance" element={<Compliance />} />
-            {/* Catch-all route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-};
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        {/* SEO meta/canonical manager */}
+        <SEOProvider />
+        {/* Analytics page tracking */}
+        <PageTracker />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/advisory" element={<Advisory />} />
+          <Route path="/procurement" element={<Procurement />} />
+          <Route path="/digital-solutions" element={<DigitalSolutions />} />
+          <Route path="/sectors" element={<Sectors />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/get-quote" element={<GetQuote />} />
+          <Route path="/solutions/solar" element={<Solar />} />
+          <Route path="/solutions/wind" element={<Wind />} />
+          <Route path="/solutions/storage" element={<Storage />} />
+          <Route path="/solutions/ev-stations" element={<EVStations />} />
+          <Route path="/solutions/b2b" element={<B2B />} />
+          <Route path="/solutions/b2c" element={<B2C />} />
+          <Route path="/solutions/b2g" element={<B2G />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/cookies" element={<Cookies />} />
+          <Route path="/compliance" element={<Compliance />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 createRoot(document.getElementById("root")!).render(<App />);
