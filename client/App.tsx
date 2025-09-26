@@ -5,7 +5,9 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 import Index from "./pages/Index";
 import Solutions from "./pages/Solutions";
 import About from "./pages/About";
@@ -35,6 +37,19 @@ import { SEOProvider } from "./components/SEOProvider";
 
 const queryClient = new QueryClient();
 
+// Page view tracker mounted under Router to access useLocation
+function PageTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    if ((window as any).gtag) {
+      (window as any).gtag("config", "G-JLJVRZ4V16", {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -43,6 +58,8 @@ const App = () => (
       <BrowserRouter>
         {/* SEO meta/canonical manager */}
         <SEOProvider />
+        {/* Analytics page tracking */}
+        <PageTracker />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/solutions" element={<Solutions />} />
