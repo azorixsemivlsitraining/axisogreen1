@@ -7,7 +7,7 @@ function upsertMeta(selector: string, attrs: Record<string, string>) {
     | HTMLLinkElement
     | null;
   if (!el) {
-    const tagName = selector.startsWith('link') ? 'link' : 'meta';
+    const tagName = selector.startsWith("link") ? "link" : "meta";
     el = document.createElement(tagName) as any;
     document.head.appendChild(el);
   }
@@ -18,7 +18,10 @@ const SITE_NAME = "AXISO Green Energies";
 const DEFAULT_IMAGE =
   "https://cdn.builder.io/api/v1/image/assets%2F59bf3e928fc9473a97d5e87470c824bb%2F661e86d7a74f464c89095a37afa49cbd?format=webp&width=1200";
 
-const routeMeta: Record<string, { title: string; description: string; keywords?: string }> = {
+const routeMeta: Record<
+  string,
+  { title: string; description: string; keywords?: string }
+> = {
   "/": {
     title: `${SITE_NAME} — Clean Energy Solutions`,
     description:
@@ -53,15 +56,18 @@ const routeMeta: Record<string, { title: string; description: string; keywords?:
   },
   "/careers": {
     title: `Careers | ${SITE_NAME}`,
-    description: "Join our mission-driven team building a sustainable energy future.",
+    description:
+      "Join our mission-driven team building a sustainable energy future.",
   },
   "/get-quote": {
     title: `Get Quote | ${SITE_NAME}`,
-    description: "Request a personalized quote for solar, wind, or storage solutions.",
+    description:
+      "Request a personalized quote for solar, wind, or storage solutions.",
   },
   "/solutions/solar": {
     title: `Solar Solutions | ${SITE_NAME}`,
-    description: "High-efficiency solar systems for homes, businesses, and government.",
+    description:
+      "High-efficiency solar systems for homes, businesses, and government.",
   },
   "/solutions/wind": {
     title: `Wind Solutions | ${SITE_NAME}`,
@@ -69,35 +75,43 @@ const routeMeta: Record<string, { title: string; description: string; keywords?:
   },
   "/solutions/storage": {
     title: `Energy Storage | ${SITE_NAME}`,
-    description: "Battery storage solutions for resilience and peak demand savings.",
+    description:
+      "Battery storage solutions for resilience and peak demand savings.",
   },
   "/solutions/ev-stations": {
     title: `EV Charging Stations | ${SITE_NAME}`,
-    description: "Smart EV charging infrastructure for homes, fleets, and public sites.",
+    description:
+      "Smart EV charging infrastructure for homes, fleets, and public sites.",
   },
   "/solutions/b2b": {
     title: `Commercial (B2B) Solar | ${SITE_NAME}`,
-    description: "End-to-end commercial solar and energy optimization services.",
+    description:
+      "End-to-end commercial solar and energy optimization services.",
   },
   "/solutions/b2c": {
     title: `Residential (B2C) Solar | ${SITE_NAME}`,
-    description: "Rooftop solar for homeowners with financing and maintenance options.",
+    description:
+      "Rooftop solar for homeowners with financing and maintenance options.",
   },
   "/solutions/b2g": {
     title: `Government (B2G) Solar | ${SITE_NAME}`,
-    description: "Government-grade renewable solutions with compliance and performance.",
+    description:
+      "Government-grade renewable solutions with compliance and performance.",
   },
   "/advisory": {
     title: `Advisory | ${SITE_NAME}`,
-    description: "Expert energy advisory, audits, design, and project management.",
+    description:
+      "Expert energy advisory, audits, design, and project management.",
   },
   "/procurement": {
     title: `Procurement | ${SITE_NAME}`,
-    description: "Trusted procurement for Tier-1 components and turnkey solutions.",
+    description:
+      "Trusted procurement for Tier-1 components and turnkey solutions.",
   },
   "/digital-solutions": {
     title: `Digital Solutions | ${SITE_NAME}`,
-    description: "IoT, monitoring, and AI-driven energy optimization platforms.",
+    description:
+      "IoT, monitoring, and AI-driven energy optimization platforms.",
   },
   "/privacy": {
     title: `Privacy Policy | ${SITE_NAME}`,
@@ -132,31 +146,70 @@ export function SEOProvider() {
 
     document.title = meta.title;
 
-    upsertMeta('meta[name="description"]', { name: 'description', content: meta.description });
+    upsertMeta('meta[name="description"]', {
+      name: "description",
+      content: meta.description,
+    });
     if (meta.keywords) {
-      upsertMeta('meta[name="keywords"]', { name: 'keywords', content: meta.keywords });
+      upsertMeta('meta[name="keywords"]', {
+        name: "keywords",
+        content: meta.keywords,
+      });
     }
-    upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index, follow' });
+    upsertMeta('meta[name="robots"]', {
+      name: "robots",
+      content: "index, follow",
+    });
 
     // Canonical
-    upsertMeta('link[rel="canonical"]', { rel: 'canonical', href: url });
+    upsertMeta('link[rel="canonical"]', { rel: "canonical", href: url });
 
     // Open Graph
-    upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: SITE_NAME });
-    upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
-    upsertMeta('meta[property="og:title"]', { property: 'og:title', content: meta.title });
-    upsertMeta('meta[property="og:description"]', { property: 'og:description', content: meta.description });
-    upsertMeta('meta[property="og:url"]', { property: 'og:url', content: url });
-    upsertMeta('meta[property="og:image"]', { property: 'og:image', content: DEFAULT_IMAGE });
+    upsertMeta('meta[property="og:site_name"]', {
+      property: "og:site_name",
+      content: SITE_NAME,
+    });
+    upsertMeta('meta[property="og:type"]', {
+      property: "og:type",
+      content: "website",
+    });
+    upsertMeta('meta[property="og:title"]', {
+      property: "og:title",
+      content: meta.title,
+    });
+    upsertMeta('meta[property="og:description"]', {
+      property: "og:description",
+      content: meta.description,
+    });
+    upsertMeta('meta[property="og:url"]', { property: "og:url", content: url });
+    upsertMeta('meta[property="og:image"]', {
+      property: "og:image",
+      content: DEFAULT_IMAGE,
+    });
 
     // Twitter
-    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
-    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: meta.title });
-    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: meta.description });
-    upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: DEFAULT_IMAGE });
+    upsertMeta('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary_large_image",
+    });
+    upsertMeta('meta[name="twitter:title"]', {
+      name: "twitter:title",
+      content: meta.title,
+    });
+    upsertMeta('meta[name="twitter:description"]', {
+      name: "twitter:description",
+      content: meta.description,
+    });
+    upsertMeta('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: DEFAULT_IMAGE,
+    });
 
     // Theme color for PWA/Chrome UI
-    upsertMeta('meta[name="theme-color"]', { name: 'theme-color', content: '#0ea5a3' });
+    upsertMeta('meta[name="theme-color"]', {
+      name: "theme-color",
+      content: "#0ea5a3",
+    });
   }, [location]);
 
   return null;
