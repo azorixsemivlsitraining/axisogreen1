@@ -40,6 +40,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        {/** SEO meta/canonical manager */}
+        {require("./components/SEOProvider")}<></>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/solutions" element={<Solutions />} />
