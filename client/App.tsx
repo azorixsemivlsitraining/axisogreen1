@@ -31,6 +31,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import Compliance from "./pages/Compliance";
+import { SEOProvider } from "./components/SEOProvider";
 
 const queryClient = new QueryClient();
 
