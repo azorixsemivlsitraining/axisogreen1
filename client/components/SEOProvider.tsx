@@ -51,6 +51,70 @@ const routeMeta: Record<string, { title: string; description: string; keywords?:
     description:
       "Guides, articles, and updates on solar, wind, storage, and sustainable practices.",
   },
+  "/careers": {
+    title: `Careers | ${SITE_NAME}`,
+    description: "Join our mission-driven team building a sustainable energy future.",
+  },
+  "/get-quote": {
+    title: `Get Quote | ${SITE_NAME}`,
+    description: "Request a personalized quote for solar, wind, or storage solutions.",
+  },
+  "/solutions/solar": {
+    title: `Solar Solutions | ${SITE_NAME}`,
+    description: "High-efficiency solar systems for homes, businesses, and government.",
+  },
+  "/solutions/wind": {
+    title: `Wind Solutions | ${SITE_NAME}`,
+    description: "Reliable wind power solutions to complement your energy mix.",
+  },
+  "/solutions/storage": {
+    title: `Energy Storage | ${SITE_NAME}`,
+    description: "Battery storage solutions for resilience and peak demand savings.",
+  },
+  "/solutions/ev-stations": {
+    title: `EV Charging Stations | ${SITE_NAME}`,
+    description: "Smart EV charging infrastructure for homes, fleets, and public sites.",
+  },
+  "/solutions/b2b": {
+    title: `Commercial (B2B) Solar | ${SITE_NAME}`,
+    description: "End-to-end commercial solar and energy optimization services.",
+  },
+  "/solutions/b2c": {
+    title: `Residential (B2C) Solar | ${SITE_NAME}`,
+    description: "Rooftop solar for homeowners with financing and maintenance options.",
+  },
+  "/solutions/b2g": {
+    title: `Government (B2G) Solar | ${SITE_NAME}`,
+    description: "Government-grade renewable solutions with compliance and performance.",
+  },
+  "/advisory": {
+    title: `Advisory | ${SITE_NAME}`,
+    description: "Expert energy advisory, audits, design, and project management.",
+  },
+  "/procurement": {
+    title: `Procurement | ${SITE_NAME}`,
+    description: "Trusted procurement for Tier-1 components and turnkey solutions.",
+  },
+  "/digital-solutions": {
+    title: `Digital Solutions | ${SITE_NAME}`,
+    description: "IoT, monitoring, and AI-driven energy optimization platforms.",
+  },
+  "/privacy": {
+    title: `Privacy Policy | ${SITE_NAME}`,
+    description: "How we protect and use your information.",
+  },
+  "/terms": {
+    title: `Terms of Service | ${SITE_NAME}`,
+    description: "Website terms, usage, and disclaimers.",
+  },
+  "/cookies": {
+    title: `Cookie Policy | ${SITE_NAME}`,
+    description: "Details of cookies used and your choices.",
+  },
+  "/compliance": {
+    title: `Compliance | ${SITE_NAME}`,
+    description: "Certifications, safety, and regulatory compliance.",
+  },
 };
 
 export function SEOProvider() {
