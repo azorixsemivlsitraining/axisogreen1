@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Company info */}
           <div className="lg:col-span-2">
             <Link
-              to="/"
+              to="#"
               className="flex flex-col items-start mb-6 select-none"
             >
               <img
