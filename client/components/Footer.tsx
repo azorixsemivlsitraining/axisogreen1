@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
           {/* Company info */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex flex-col items-start mb-6 select-none">
+            <Link to="#" className="flex flex-col items-start mb-6 select-none">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe9b318f844124426beb12ccd67e6243b?format=webp&width=800"
                 alt="AXISO Green Energy logo"
