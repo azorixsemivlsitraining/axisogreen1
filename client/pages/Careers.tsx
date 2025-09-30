@@ -604,10 +604,11 @@ export default function Careers() {
                             <Trophy className="w-4 h-4" />
                             {job.experience}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <DollarSign className="w-4 h-4" />
-                            {job.salary}
-                          </div>
+                         <div className="flex items-center gap-1">
+  <span className="w-4 h-4 flex items-center justify-center text-primary font-bold">₹</span>
+  {job.salary.replace('$', '')}
+</div>
+
                         </div>
                       </div>
 
