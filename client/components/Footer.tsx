@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram, ArrowUp } from "lucide-react";
+import { Facebook, Linkedin, Instagram, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Footer() {
@@ -35,10 +35,21 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    {
+      icon: Facebook,
+      href: "https://www.facebook.com/people/Axiso-Green-Energy/61567136736900/?rdid=lzUX5nBf2lTLnktE&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1D16TL1Fkc%2F",
+      label: "Facebook",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/axisogreen/",
+      label: "LinkedIn",
+    },
+    {
+      icon: Instagram,
+      href: "https://www.instagram.com/axisogreenenergy/?igsh=MTQ1dTR2OWFiYWU2Zw%3D%3D#",
+      label: "Instagram",
+    },
   ];
 
   return (
@@ -57,8 +68,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
           {/* Company info */}
           <div className="lg:col-span-2">
-            <a
-              href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/"
+            <Link
+              to="/"
               className="flex flex-col items-start mb-6 select-none"
             >
               <img
@@ -71,7 +82,7 @@ export default function Footer() {
               <span className="mt-3 text-xl font-bold text-white">
                 AXISO Green Energies Pvt. Ltd.
               </span>
-            </a>
+            </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               Leading the transition to sustainable energy with innovative
               renewable solutions for a cleaner, greener future.
@@ -84,6 +95,8 @@ export default function Footer() {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-white/10 hover:bg-primary transition-colors p-2 rounded-lg"
                   >
                     <IconComponent className="h-5 w-5" />
@@ -138,60 +151,3 @@ export default function Footer() {
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
                     {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Newsletter signup */}
-        <div className="border-t border-white/10 pt-8 mb-8">
-          <div className="max-w-md">
-            <h3 className="font-semibold mb-2">Stay Updated</h3>
-            <p className="text-muted-foreground text-sm mb-4">
-              Get the latest news about renewable energy and sustainability.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
-                Subscribe
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Axiso Green Energies. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <span>Certified ISO 14001</span>
-            <span>NABCEP Accredited</span>
-            <span>OSHA Compliant</span>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
