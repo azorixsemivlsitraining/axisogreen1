@@ -64,8 +64,8 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <a
-              href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/"
+            <Router.Link
+              to="/"
               className="flex items-center space-x-3"
             >
               <img
@@ -76,7 +76,7 @@ export default function Navigation() {
                 decoding="async"
               />
               <span className="sr-only">AXISO Green Energy</span>
-            </a>
+            </Router.Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
@@ -138,7 +138,7 @@ export default function Navigation() {
                       >
                         {/* Left column: main dropdown items */}
                         <div className="w-56 p-1">
-                          {item.dropdown.map((dropdownItem, index) => (
+                          {item.dropdown.map((dropdownItem) => (
                             <div key={dropdownItem.path} className="px-2 py-1">
                               <div className="flex items-center justify-between">
                                 <Router.Link
@@ -185,7 +185,7 @@ export default function Navigation() {
                           ))}
                         </div>
 
-                        {/* Right column: subitems (shown when a dropdown item is selected) */}
+                        {/* Right column: subitems */}
                         <div className="w-48 p-2">
                           {item.dropdown.map((d) => {
                             if (!d.sub) return null;
