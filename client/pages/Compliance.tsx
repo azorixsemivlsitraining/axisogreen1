@@ -1,5 +1,7 @@
 import * as React from "react";
 import { ShieldCheck, FileCheck, Globe, Award } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export default function Compliance() {
   const certifications = [
