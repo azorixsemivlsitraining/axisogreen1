@@ -303,16 +303,17 @@ export default function Careers() {
         "Wellness Programs",
       ],
     },
-    {
-      icon: DollarSign,
-      title: "Financial",
-      items: [
-        "Competitive Salary",
-        "401k with Match",
-        "Stock Options",
-        "Performance Bonuses",
-      ],
-    },
+  {
+  icon: () => <span className="text-xl font-bold">₹</span>, // Use text instead of DollarSign icon
+  title: "Financial",
+  items: [
+    "Competitive Salary",
+    "401k with Match",
+    "Stock Options",
+    "Performance Bonuses",
+  ],
+},
+
     {
       icon: Clock,
       title: "Work-Life Balance",
