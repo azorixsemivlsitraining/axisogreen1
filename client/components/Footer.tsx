@@ -68,13 +68,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
           {/* Company info */}
           <div className="lg:col-span-2">
-            <Link
-              to="#"
-              className="flex flex-col items-start mb-6 select-none"
-            >
+            <Link to="/" className="flex flex-col items-start mb-6 select-none">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe9b318f844124426beb12ccd67e6243b?format=webp&width=800"
-                alt="AXIS Green Energy logo"
+                alt="AXISO Green Energy logo"
                 className="h-[110px] md:h-[120px] w-auto object-contain filter brightness-110 contrast-125 saturate-125 drop-shadow-md select-none"
                 loading="lazy"
                 decoding="async"
@@ -151,3 +148,60 @@ export default function Footer() {
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
                     {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2">
+              {footerLinks.legal.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    to={link.href}
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Newsletter signup */}
+        <div className="border-t border-white/10 pt-8 mb-8">
+          <div className="max-w-md">
+            <h3 className="font-semibold mb-2">Stay Updated</h3>
+            <p className="text-muted-foreground text-sm mb-4">
+              Get the latest news about renewable energy and sustainability.
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <Button size="sm" className="bg-primary hover:bg-primary/90">
+                Subscribe
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
+          <p>&copy; 2024 Axiso Green Energies. All rights reserved.</p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <span>Certified ISO 14001</span>
+            <span>Certified ISO 9001</span>
+            <span>TGREDCO Certified</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
