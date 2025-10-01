@@ -10,10 +10,16 @@ const ADMIN_TOKEN_TTL_MS = 1000 * 60 * 60 * 8; // 8 hours
 type AdminTokenPayload = { u: string; exp: number };
 
 function createAdminToken(username: string): string {
-  const payload: AdminTokenPayload = { u: username, exp: Date.now() + ADMIN_TOKEN_TTL_MS };
+  const payload: AdminTokenPayload = {
+    u: username,
+    exp: Date.now() + ADMIN_TOKEN_TTL_MS,
+  };
   const json = JSON.stringify(payload);
   const b64 = Buffer.from(json).toString("base64url");
-  const sig = crypto.createHmac("sha256", ADMIN_TOKEN_SECRET).update(b64).digest("base64url");
+  const sig = crypto
+    .createHmac("sha256", ADMIN_TOKEN_SECRET)
+    .update(b64)
+    .digest("base64url");
   return `${b64}.${sig}`;
 }
 
@@ -21,11 +27,18 @@ function verifyAdminToken(token: string): AdminTokenPayload | null {
   const parts = token.split(".");
   if (parts.length !== 2) return null;
   const [b64, sig] = parts;
-  const expected = crypto.createHmac("sha256", ADMIN_TOKEN_SECRET).update(b64).digest("base64url");
-  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return null;
+  const expected = crypto
+    .createHmac("sha256", ADMIN_TOKEN_SECRET)
+    .update(b64)
+    .digest("base64url");
+  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected)))
+    return null;
   try {
-    const payload = JSON.parse(Buffer.from(b64, "base64url").toString("utf8")) as AdminTokenPayload;
-    if (typeof payload.exp !== "number" || Date.now() > payload.exp) return null;
+    const payload = JSON.parse(
+      Buffer.from(b64, "base64url").toString("utf8"),
+    ) as AdminTokenPayload;
+    if (typeof payload.exp !== "number" || Date.now() > payload.exp)
+      return null;
     return payload;
   } catch {
     return null;
@@ -52,7 +65,7 @@ async function supabaseRequest(
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     throw new Error("Supabase not configured");
   }
-  const url = `${SUPABASE_URL}/rest/v1/${table}${query}`;
+  const url = `${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${table}${query}`;
   const headers: Record<string, string> = {
     apikey: SUPABASE_KEY,
     Authorization: `Bearer ${SUPABASE_KEY}`,
@@ -100,9 +113,12 @@ router.post("/login", async (req, res) => {
 router.use(async (req, res, next) => {
   try {
     const auth = req.headers.authorization as string | undefined;
-    if (!auth) return res.status(401).json({ error: "Missing Authorization header" });
+    if (!auth)
+      return res.status(401).json({ error: "Missing Authorization header" });
     // Accept built-in admin token (Bearer <token>)
-    const maybeToken = auth.startsWith("Bearer ") ? auth.slice("Bearer ".length) : auth;
+    const maybeToken = auth.startsWith("Bearer ")
+      ? auth.slice("Bearer ".length)
+      : auth;
     const payload = verifyAdminToken(maybeToken);
     if (payload) {
       (req as any).adminUser = { username: payload.u };
@@ -232,6 +248,51 @@ router.post("/jobs", async (req, res) => {
   }
 });
 
+// Update job
+router.patch("/jobs/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = (req.body || {}) as Record<string, any>;
+    const allowedKeys = [
+      "title",
+      "location",
+      "employment_type",
+      "department",
+      "description",
+      "requirements",
+      "benefits",
+      "featured",
+    ];
+    const payload: Record<string, any> = {};
+    for (const key of allowedKeys) if (key in body) payload[key] = body[key];
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.jobs,
+      "PATCH",
+      payload,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete job
+router.delete("/jobs/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.jobs,
+      "DELETE",
+      undefined,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Create resource
 router.post("/resources", async (req, res) => {
   try {
@@ -249,7 +310,57 @@ router.post("/resources", async (req, res) => {
     ];
     const payload: Record<string, any> = {};
     for (const key of allowedKeys) if (key in body) payload[key] = body[key];
-    const result = await supabaseRequest(ALLOWED_TABLES.resources, "POST", payload);
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.resources,
+      "POST",
+      payload,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update resource
+router.patch("/resources/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = (req.body || {}) as Record<string, any>;
+    const allowedKeys = [
+      "title",
+      "resource_type",
+      "file_url",
+      "description",
+      "tags",
+      "featured",
+      "author",
+      "image",
+      "read_time",
+    ];
+    const payload: Record<string, any> = {};
+    for (const key of allowedKeys) if (key in body) payload[key] = body[key];
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.resources,
+      "PATCH",
+      payload,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete resource
+router.delete("/resources/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.resources,
+      "DELETE",
+      undefined,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
     res.json(result);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
@@ -356,7 +467,10 @@ router.get("/export-all/xlsx", async (_req, res) => {
     toSheet(resources as any[], "resources");
 
     const wbout = XLSX.write(wb, { bookType: "xlsx", type: "buffer" as any });
-    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    );
     res.setHeader("Content-Disposition", "attachment; filename=export.xlsx");
     return res.send(wbout);
   } catch (err: any) {
