@@ -52,7 +52,7 @@ async function supabaseRequest(
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     throw new Error("Supabase not configured");
   }
-  const url = `${SUPABASE_URL}/rest/v1/${table}${query}`;
+  const url = `${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${table}${query}`;
   const headers: Record<string, string> = {
     apikey: SUPABASE_KEY,
     Authorization: `Bearer ${SUPABASE_KEY}`,
