@@ -1,49 +1,31 @@
 import { Router } from "express";
+import {
+  isSupabaseConfigured,
+  supabaseRequest,
+  SupabaseConfigError,
+} from "../lib/supabase";
 
 const router = Router();
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
-
-if (!SUPABASE_URL || !SUPABASE_KEY) {
+if (!isSupabaseConfigured()) {
   console.warn(
     "Supabase credentials not set (SUPABASE_URL/SUPABASE_KEY). Public submission routes will fail until configured.",
   );
 }
 
-async function supabaseRequest(
-  table: string,
-  method = "GET",
-  body?: any,
-  query = "",
+function respondWithSupabaseError(
+  res: Parameters<typeof router.post>[1],
+  error: unknown,
+  context: string,
 ) {
-  if (!SUPABASE_URL || !SUPABASE_KEY) {
-    throw new Error("Supabase not configured");
-  }
-  const url = `${SUPABASE_URL.replace(/\/$/, "")}/rest/v1/${table}${query}`;
-  const headers: Record<string, string> = {
-    apikey: SUPABASE_KEY,
-    Authorization: `Bearer ${SUPABASE_KEY}`,
-  };
-  if (method === "GET") headers.Accept = "application/json";
-  if (body) headers["Content-Type"] = "application/json";
-  if (method !== "GET") headers.Prefer = "return=representation";
-  const res = await fetch(url, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    const headersObj: Record<string, string> = {};
-    res.headers.forEach((v, k) => (headersObj[k] = v));
-    throw new Error(
-      `Supabase request failed: status=${res.status} statusText=${res.statusText} url=${url} body=${text} headers=${JSON.stringify(headersObj)}`,
-    );
-  }
-  const contentType = res.headers.get("content-type") || "";
-  if (contentType.includes("application/json")) return res.json();
-  return res.text();
+  console.error(context, error);
+  const message =
+    error instanceof SupabaseConfigError
+      ? error.message
+      : error instanceof Error
+        ? error.message
+        : "Unexpected Supabase error";
+  return (res as any).status(500).json({ error: message });
 }
 
 // Public submission endpoints
@@ -70,9 +52,8 @@ router.post("/quotes", async (req, res) => {
 
     const result = await supabaseRequest("quotes", "POST", payload);
     return res.status(201).json(result);
-  } catch (err: any) {
-    console.error("Public /quotes error:", err);
-    return res.status(500).json({ error: err.message });
+  } catch (error) {
+    return respondWithSupabaseError(res, error, "Public /quotes error");
   }
 });
 
@@ -84,9 +65,8 @@ router.post("/contacts", async (req, res) => {
     for (const key of allowedKeys) if (key in body) payload[key] = body[key];
     const result = await supabaseRequest("contacts", "POST", payload);
     return res.status(201).json(result);
-  } catch (err: any) {
-    console.error("Public /contacts error:", err);
-    return res.status(500).json({ error: err.message });
+  } catch (error) {
+    return respondWithSupabaseError(res, error, "Public /contacts error");
   }
 });
 
@@ -95,9 +75,8 @@ router.get("/jobs", async (_req, res) => {
   try {
     const rows = await supabaseRequest("jobs", "GET");
     return res.json(rows);
-  } catch (err: any) {
-    console.error("Public /jobs error:", err);
-    return res.status(500).json({ error: err.message });
+  } catch (error) {
+    return respondWithSupabaseError(res, error, "Public /jobs error");
   }
 });
 
@@ -105,9 +84,8 @@ router.get("/resources", async (_req, res) => {
   try {
     const rows = await supabaseRequest("resources", "GET");
     return res.json(rows);
-  } catch (err: any) {
-    console.error("Public /resources error:", err);
-    return res.status(500).json({ error: err.message });
+  } catch (error) {
+    return respondWithSupabaseError(res, error, "Public /resources error");
   }
 });
 
