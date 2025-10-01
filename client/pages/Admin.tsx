@@ -47,20 +47,6 @@ export default function Admin() {
     fetchList();
   }, [adminToken, authChecked, navigate]);
 
-  if (!adminToken) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <main className="pt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-sm text-muted-foreground">
-            {authChecked ? "Redirecting to login..." : "Checking admin session..."}
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
   const fetchList = async () => {
     const headers: any = { Accept: "application/json" };
     if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
