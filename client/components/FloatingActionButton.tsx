@@ -1,4 +1,3 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { MessageCircle, Phone, Mail, ArrowUp } from "lucide-react";
