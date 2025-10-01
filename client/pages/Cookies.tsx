@@ -4,22 +4,24 @@ import Footer from "@/components/Footer";
 
 export default function Cookies() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Header */}
-      <section className="bg-gradient-to-r from-solar-600 to-energy-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Cookie Policy</h1>
-          <p className="text-lg max-w-2xl mx-auto">
-            Understand how cookies are used on AXISO Green Energy’s website to
-            improve your experience, personalize content, and analyze
-            performance.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <main className="pt-20">
+        {/* Header */}
+        <section className="bg-gradient-to-r from-solar-600 to-energy-500 text-white py-16">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <h1 className="text-4xl font-bold mb-4">Cookie Policy</h1>
+            <p className="text-lg max-w-2xl mx-auto">
+              Understand how cookies are used on AXISO Green Energy’s website to
+              improve your experience, personalize content, and analyze
+              performance.
+            </p>
+          </div>
+        </section>
 
-      {/* Content */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 space-y-12 text-gray-700">
+        {/* Content */}
+        <section className="py-16">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 space-y-12 text-gray-700">
           {/* Intro */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
@@ -124,8 +126,10 @@ export default function Cookies() {
               .
             </p>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
+      </main>
+      <Footer />
     </div>
   );
 }
