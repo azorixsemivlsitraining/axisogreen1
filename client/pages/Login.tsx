@@ -15,8 +15,8 @@ import * as React from "react";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState("admin");
-  const [password, setPassword] = React.useState("admin@2024");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState(false);
 

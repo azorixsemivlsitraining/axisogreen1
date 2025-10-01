@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -27,17 +28,24 @@ export default function Admin() {
     description: "",
   });
 
+  const navigate = useNavigate();
   const [adminToken, setAdminToken] = React.useState<string | null>(null);
+  const [authChecked, setAuthChecked] = React.useState(false);
 
   React.useEffect(() => {
     const tok = localStorage.getItem("adminToken");
     if (tok) setAdminToken(tok);
+    setAuthChecked(true);
   }, []);
 
   React.useEffect(() => {
-    if (!adminToken) return;
+    if (!authChecked) return;
+    if (!adminToken) {
+      navigate("/login", { replace: true });
+      return;
+    }
     fetchList();
-  }, [adminToken]);
+  }, [adminToken, authChecked, navigate]);
 
   const fetchList = async () => {
     const headers: any = { Accept: "application/json" };
@@ -303,23 +311,6 @@ export default function Admin() {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError(null);
-    try {
-      const resp = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await resp.json();
-      if (!resp.ok) throw new Error(data?.error || "Login failed");
-      setAdminToken(data.token);
-    } catch (err: any) {
-      setLoginError(err.message || "Login failed");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -327,11 +318,10 @@ export default function Admin() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
           {!adminToken ? (
-            <div className="mb-6 text-sm">
-              You must be logged in to view this page.{" "}
-              <a className="underline" href="/login">
-                Go to Login
-              </a>
+            <div className="mb-6 text-sm text-muted-foreground">
+              {authChecked
+                ? "Redirecting to admin login..."
+                : "Checking admin session..."}
             </div>
           ) : (
             <div className="mb-4 text-sm">
