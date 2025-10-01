@@ -240,6 +240,7 @@ export default function Admin() {
             <div className="mb-4 text-sm">Logged in. <Button variant="outline" onClick={() => { localStorage.removeItem("adminToken"); window.location.href = "/login"; }}>Logout</Button></div>
           )}
 
+          {adminToken && (
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div className="bg-white/80 p-6 rounded-xl shadow">
               <h2 className="font-semibold mb-3">Submissions</h2>
@@ -314,7 +315,9 @@ export default function Admin() {
               </div>
             </div>
           </section>
+          )}
 
+          {adminToken && (
           <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <form
               onSubmit={submitJob}
@@ -430,6 +433,7 @@ export default function Admin() {
               </Button>
             </form>
           </section>
+          )}
         </div>
       </main>
       <Footer />
