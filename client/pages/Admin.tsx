@@ -28,21 +28,26 @@ export default function Admin() {
   });
 
   const [adminToken, setAdminToken] = React.useState<string | null>(null);
-  const [username, setUsername] = React.useState("admin");
-  const [password, setPassword] = React.useState("admin@2024");
-  const [loginError, setLoginError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    const tok = localStorage.getItem("adminToken");
+    if (tok) setAdminToken(tok);
+  }, []);
+
+  React.useEffect(() => {
+    if (!adminToken) return;
     fetchList();
   }, [adminToken]);
 
   const fetchList = async () => {
-    const headers: any = { "content-type": "application/json" };
+    const headers: any = { Accept: "application/json" };
     if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
 
     const safeJson = async (resPromise: Promise<Response>) => {
       try {
         const res = await resPromise;
+        const ct = res.headers.get("content-type") || "";
+        if (!ct.includes("application/json")) return null;
         const json = await res.json().catch(() => null);
         return json;
       } catch (e) {
@@ -140,11 +145,12 @@ export default function Admin() {
           contentType: file.type,
         }),
       });
-      const data = await resp.json();
+      const ct = resp.headers.get("content-type") || "";
+      const data = ct.includes("application/json") ? await resp.json().catch(() => null) : null;
       if (data?.url) {
         setResourceForm((s) => ({ ...s, file_url: data.url }));
       } else {
-        console.error("Upload failed", data);
+        console.error("Upload failed", data || (await resp.text().catch(() => "")));
       }
     } catch (err) {
       console.error(err);
@@ -227,20 +233,11 @@ export default function Admin() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
           {!adminToken ? (
-            <form onSubmit={handleLogin} className="mb-6 flex items-end gap-3">
-              <div>
-                <label className="block text-sm font-medium">Username</label>
-                <Input value={username} onChange={(e: any) => setUsername(e.target.value)} placeholder="admin" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Password</label>
-                <Input type="password" value={password} onChange={(e: any) => setPassword(e.target.value)} placeholder="admin@2024" />
-              </div>
-              <Button type="submit">Login</Button>
-              {loginError && <span className="text-red-600 text-sm">{loginError}</span>}
-            </form>
+            <div className="mb-6 text-sm">
+              You must be logged in to view this page. <a className="underline" href="/login">Go to Login</a>
+            </div>
           ) : (
-            <div className="mb-4 text-sm">Logged in. <Button variant="outline" onClick={() => setAdminToken(null)}>Logout</Button></div>
+            <div className="mb-4 text-sm">Logged in. <Button variant="outline" onClick={() => { localStorage.removeItem("adminToken"); window.location.href = "/login"; }}>Logout</Button></div>
           )}
 
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
