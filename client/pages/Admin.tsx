@@ -311,23 +311,6 @@ export default function Admin() {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError(null);
-    try {
-      const resp = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await resp.json();
-      if (!resp.ok) throw new Error(data?.error || "Login failed");
-      setAdminToken(data.token);
-    } catch (err: any) {
-      setLoginError(err.message || "Login failed");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
