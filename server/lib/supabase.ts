@@ -13,10 +13,15 @@ type SupabaseConfig = {
 const SupabaseEnvSchema = z.object({
   SUPABASE_URL: z
     .string()
-    .url("SUPABASE_URL must be a valid URL, for example https://your-project.supabase.co"),
+    .url(
+      "SUPABASE_URL must be a valid URL, for example https://your-project.supabase.co",
+    ),
   SUPABASE_KEY: z
     .string()
-    .min(1, "SUPABASE_KEY is required—use the anon public key from the Supabase dashboard"),
+    .min(
+      1,
+      "SUPABASE_KEY is required—use the anon public key from the Supabase dashboard",
+    ),
 });
 
 export class SupabaseConfigError extends Error {
