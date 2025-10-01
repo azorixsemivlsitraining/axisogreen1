@@ -28,17 +28,24 @@ export default function Admin() {
     description: "",
   });
 
+  const navigate = useNavigate();
   const [adminToken, setAdminToken] = React.useState<string | null>(null);
+  const [authChecked, setAuthChecked] = React.useState(false);
 
   React.useEffect(() => {
     const tok = localStorage.getItem("adminToken");
     if (tok) setAdminToken(tok);
+    setAuthChecked(true);
   }, []);
 
   React.useEffect(() => {
-    if (!adminToken) return;
+    if (!authChecked) return;
+    if (!adminToken) {
+      navigate("/login", { replace: true });
+      return;
+    }
     fetchList();
-  }, [adminToken]);
+  }, [adminToken, authChecked, navigate]);
 
   const fetchList = async () => {
     const headers: any = { Accept: "application/json" };
