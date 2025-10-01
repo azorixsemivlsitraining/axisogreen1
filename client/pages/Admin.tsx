@@ -318,11 +318,8 @@ export default function Admin() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
           {!adminToken ? (
-            <div className="mb-6 text-sm">
-              You must be logged in to view this page.{" "}
-              <a className="underline" href="/login">
-                Go to Login
-              </a>
+            <div className="mb-6 text-sm text-muted-foreground">
+              {authChecked ? "Redirecting to admin login..." : "Checking admin session..."}
             </div>
           ) : (
             <div className="mb-4 text-sm">
