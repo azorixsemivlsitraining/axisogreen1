@@ -102,6 +102,91 @@ export default function Admin() {
   };
 
   const [uploading, setUploading] = React.useState(false);
+
+  // Editing state for jobs
+  const [editingJobId, setEditingJobId] = React.useState<string | number | null>(null);
+  const [editingJob, setEditingJob] = React.useState<any>({
+    title: "",
+    location: "",
+    employment_type: "",
+    department: "",
+    description: "",
+    requirements: "",
+  });
+
+  const startEditJob = (j: any) => {
+    setEditingJobId(j.id);
+    setEditingJob({
+      title: j.title || "",
+      location: j.location || "",
+      employment_type: j.employment_type || "",
+      department: j.department || "",
+      description: j.description || "",
+      requirements: j.requirements || "",
+    });
+  };
+
+  const saveJob = async () => {
+    if (!editingJobId) return;
+    const headers: any = { "content-type": "application/json" };
+    if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+    await fetch(`/api/admin/jobs/${editingJobId}`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(editingJob),
+    });
+    setEditingJobId(null);
+    fetchList();
+  };
+
+  const deleteJob = async (id: any) => {
+    if (!confirm("Delete this job?")) return;
+    const headers: any = {};
+    if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+    await fetch(`/api/admin/jobs/${id}`, { method: "DELETE", headers });
+    fetchList();
+  };
+
+  // Editing state for resources
+  const [editingResourceId, setEditingResourceId] = React.useState<string | number | null>(null);
+  const [editingResource, setEditingResource] = React.useState<any>({
+    title: "",
+    resource_type: "",
+    file_url: "",
+    description: "",
+  });
+
+  const startEditResource = (r: any) => {
+    setEditingResourceId(r.id);
+    setEditingResource({
+      title: r.title || "",
+      resource_type: r.resource_type || "",
+      file_url: r.file_url || "",
+      description: r.description || "",
+    });
+  };
+
+  const saveResource = async () => {
+    if (!editingResourceId) return;
+    const headers: any = { "content-type": "application/json" };
+    if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+    await fetch(`/api/admin/resources/${editingResourceId}`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(editingResource),
+    });
+    setEditingResourceId(null);
+    fetchList();
+  };
+
+  const deleteResource = async (id: any) => {
+    if (!confirm("Delete this resource?")) return;
+    const headers: any = {};
+    if (adminToken) headers.Authorization = `Bearer ${adminToken}`;
+    await fetch(`/api/admin/resources/${id}`, { method: "DELETE", headers });
+    fetchList();
+  };
+
   const submitResource = async (e: React.FormEvent) => {
     e.preventDefault();
     const headers: any = { "content-type": "application/json" };
@@ -294,10 +379,31 @@ export default function Admin() {
 
               <div>
                 <h3 className="font-medium">Existing Jobs</h3>
-                <ul className="mt-2 space-y-2 text-sm">
+                <ul className="mt-2 space-y-3 text-sm">
                   {jobs.map((j: any, idx: number) => (
-                    <li key={j.id ?? `job-${idx}`}>
-                      {j.title} — {j.location}
+                    <li key={j.id ?? `job-${idx}`} className="p-2 rounded border">
+                      {editingJobId === j.id ? (
+                        <div className="space-y-2">
+                          <Input placeholder="Title" value={editingJob.title} onChange={(e: any) => setEditingJob({ ...editingJob, title: e.target.value })} />
+                          <Input placeholder="Location" value={editingJob.location} onChange={(e: any) => setEditingJob({ ...editingJob, location: e.target.value })} />
+                          <Input placeholder="Employment Type" value={editingJob.employment_type} onChange={(e: any) => setEditingJob({ ...editingJob, employment_type: e.target.value })} />
+                          <Input placeholder="Department" value={editingJob.department} onChange={(e: any) => setEditingJob({ ...editingJob, department: e.target.value })} />
+                          <Textarea placeholder="Description" value={editingJob.description} onChange={(e: any) => setEditingJob({ ...editingJob, description: e.target.value })} />
+                          <Textarea placeholder="Requirements" value={editingJob.requirements} onChange={(e: any) => setEditingJob({ ...editingJob, requirements: e.target.value })} />
+                          <div className="flex gap-2">
+                            <Button size="sm" onClick={saveJob}>Save</Button>
+                            <Button size="sm" variant="outline" onClick={() => setEditingJobId(null)}>Cancel</Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <span>{j.title} — {j.location}</span>
+                          <div className="flex gap-2">
+                            <Button size="sm" variant="outline" onClick={() => startEditJob(j)}>Edit</Button>
+                            <Button size="sm" variant="destructive" onClick={() => deleteJob(j.id)}>Delete</Button>
+                          </div>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -305,10 +411,29 @@ export default function Admin() {
 
               <div className="mt-4">
                 <h3 className="font-medium">Resources</h3>
-                <ul className="mt-2 space-y-2 text-sm">
+                <ul className="mt-2 space-y-3 text-sm">
                   {resources.map((r: any, idx: number) => (
-                    <li key={r.id ?? `resource-${idx}`}>
-                      {r.title} — {r.resource_type}
+                    <li key={r.id ?? `resource-${idx}`} className="p-2 rounded border">
+                      {editingResourceId === r.id ? (
+                        <div className="space-y-2">
+                          <Input placeholder="Title" value={editingResource.title} onChange={(e: any) => setEditingResource({ ...editingResource, title: e.target.value })} />
+                          <Input placeholder="Type" value={editingResource.resource_type} onChange={(e: any) => setEditingResource({ ...editingResource, resource_type: e.target.value })} />
+                          <Input placeholder="File URL" value={editingResource.file_url} onChange={(e: any) => setEditingResource({ ...editingResource, file_url: e.target.value })} />
+                          <Textarea placeholder="Description" value={editingResource.description} onChange={(e: any) => setEditingResource({ ...editingResource, description: e.target.value })} />
+                          <div className="flex gap-2">
+                            <Button size="sm" onClick={saveResource}>Save</Button>
+                            <Button size="sm" variant="outline" onClick={() => setEditingResourceId(null)}>Cancel</Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <span>{r.title} — {r.resource_type}</span>
+                          <div className="flex gap-2">
+                            <Button size="sm" variant="outline" onClick={() => startEditResource(r)}>Edit</Button>
+                            <Button size="sm" variant="destructive" onClick={() => deleteResource(r.id)}>Delete</Button>
+                          </div>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
