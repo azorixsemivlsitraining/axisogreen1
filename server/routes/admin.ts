@@ -232,6 +232,51 @@ router.post("/jobs", async (req, res) => {
   }
 });
 
+// Update job
+router.patch("/jobs/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = (req.body || {}) as Record<string, any>;
+    const allowedKeys = [
+      "title",
+      "location",
+      "employment_type",
+      "department",
+      "description",
+      "requirements",
+      "benefits",
+      "featured",
+    ];
+    const payload: Record<string, any> = {};
+    for (const key of allowedKeys) if (key in body) payload[key] = body[key];
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.jobs,
+      "PATCH",
+      payload,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete job
+router.delete("/jobs/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.jobs,
+      "DELETE",
+      undefined,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Create resource
 router.post("/resources", async (req, res) => {
   try {
@@ -250,6 +295,52 @@ router.post("/resources", async (req, res) => {
     const payload: Record<string, any> = {};
     for (const key of allowedKeys) if (key in body) payload[key] = body[key];
     const result = await supabaseRequest(ALLOWED_TABLES.resources, "POST", payload);
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update resource
+router.patch("/resources/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = (req.body || {}) as Record<string, any>;
+    const allowedKeys = [
+      "title",
+      "resource_type",
+      "file_url",
+      "description",
+      "tags",
+      "featured",
+      "author",
+      "image",
+      "read_time",
+    ];
+    const payload: Record<string, any> = {};
+    for (const key of allowedKeys) if (key in body) payload[key] = body[key];
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.resources,
+      "PATCH",
+      payload,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
+    res.json(result);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete resource
+router.delete("/resources/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await supabaseRequest(
+      ALLOWED_TABLES.resources,
+      "DELETE",
+      undefined,
+      `?id=eq.${encodeURIComponent(id)}`,
+    );
     res.json(result);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
