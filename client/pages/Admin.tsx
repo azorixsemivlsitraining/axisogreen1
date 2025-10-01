@@ -319,7 +319,9 @@ export default function Admin() {
           <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
           {!adminToken ? (
             <div className="mb-6 text-sm text-muted-foreground">
-              {authChecked ? "Redirecting to admin login..." : "Checking admin session..."}
+              {authChecked
+                ? "Redirecting to admin login..."
+                : "Checking admin session..."}
             </div>
           ) : (
             <div className="mb-4 text-sm">
