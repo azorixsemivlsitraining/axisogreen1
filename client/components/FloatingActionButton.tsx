@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { MessageCircle, Phone, Mail, ArrowUp } from "lucide-react";
 
 export default function FloatingActionButton() {
@@ -48,12 +49,23 @@ export default function FloatingActionButton() {
 
   const actions = [
     {
-      icon: MessageCircle,
-      label: "Chat",
-      color: "bg-solar-500 hover:bg-solar-600",
+      icon: Mail,
+      label: "Email",
+      color: "bg-sky-500 hover:bg-sky-600",
+      onClick: () => (window.location.href = "mailto:axisogreenenergy@gmail.com"),
     },
-    { icon: Phone, label: "Call", color: "bg-energy-500 hover:bg-energy-600" },
-    { icon: Mail, label: "Email", color: "bg-sky-500 hover:bg-sky-600" },
+    {
+      icon: Phone,
+      label: "Call",
+      color: "bg-emerald-500 hover:bg-emerald-600",
+      onClick: () => (window.location.href = "tel:+919063447838"),
+    },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      color: "bg-emerald-500 hover:bg-emerald-600",
+      onClick: () => window.open("https://wa.me/919063447838", "_blank"),
+    },
   ];
 
   return (
@@ -93,7 +105,7 @@ export default function FloatingActionButton() {
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => console.log(`${action.label} clicked`)}
+              onClick={action.onClick}
             >
               <action.icon className="w-6 h-6" />
             </motion.button>
