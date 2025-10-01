@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, type Response } from "express";
 import {
   isSupabaseConfigured,
   supabaseRequest,
@@ -14,7 +14,7 @@ if (!isSupabaseConfigured()) {
 }
 
 function respondWithSupabaseError(
-  res: Parameters<typeof router.post>[1],
+  res: Response,
   error: unknown,
   context: string,
 ) {
@@ -25,7 +25,7 @@ function respondWithSupabaseError(
       : error instanceof Error
         ? error.message
         : "Unexpected Supabase error";
-  return (res as any).status(500).json({ error: message });
+  return res.status(500).json({ error: message });
 }
 
 // Public submission endpoints
