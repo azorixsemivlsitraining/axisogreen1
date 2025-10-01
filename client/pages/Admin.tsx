@@ -104,7 +104,9 @@ export default function Admin() {
   const [uploading, setUploading] = React.useState(false);
 
   // Editing state for jobs
-  const [editingJobId, setEditingJobId] = React.useState<string | number | null>(null);
+  const [editingJobId, setEditingJobId] = React.useState<
+    string | number | null
+  >(null);
   const [editingJob, setEditingJob] = React.useState<any>({
     title: "",
     location: "",
@@ -148,7 +150,9 @@ export default function Admin() {
   };
 
   // Editing state for resources
-  const [editingResourceId, setEditingResourceId] = React.useState<string | number | null>(null);
+  const [editingResourceId, setEditingResourceId] = React.useState<
+    string | number | null
+  >(null);
   const [editingResource, setEditingResource] = React.useState<any>({
     title: "",
     resource_type: "",
@@ -231,11 +235,16 @@ export default function Admin() {
         }),
       });
       const ct = resp.headers.get("content-type") || "";
-      const data = ct.includes("application/json") ? await resp.json().catch(() => null) : null;
+      const data = ct.includes("application/json")
+        ? await resp.json().catch(() => null)
+        : null;
       if (data?.url) {
         setResourceForm((s) => ({ ...s, file_url: data.url }));
       } else {
-        console.error("Upload failed", data || (await resp.text().catch(() => "")));
+        console.error(
+          "Upload failed",
+          data || (await resp.text().catch(() => "")),
+        );
       }
     } catch (err) {
       console.error(err);
@@ -319,245 +328,414 @@ export default function Admin() {
           <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
           {!adminToken ? (
             <div className="mb-6 text-sm">
-              You must be logged in to view this page. <a className="underline" href="/login">Go to Login</a>
+              You must be logged in to view this page.{" "}
+              <a className="underline" href="/login">
+                Go to Login
+              </a>
             </div>
           ) : (
-            <div className="mb-4 text-sm">Logged in. <Button variant="outline" onClick={() => { localStorage.removeItem("adminToken"); window.location.href = "/login"; }}>Logout</Button></div>
-          )}
-
-          {adminToken && (
-          <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div className="bg-white/80 p-6 rounded-xl shadow">
-              <h2 className="font-semibold mb-3">Submissions</h2>
-              <div className="flex gap-2">
-                <Button onClick={() => download("quotes")}>
-                  Download Quotes
-                </Button>
-                <Button onClick={() => download("contacts")}>
-                  Download Contacts
-                </Button>
-                <Button variant="outline" onClick={downloadExcel}>Download All (Excel)</Button>
-              </div>
-              <div className="mt-4">
-                <h3 className="font-medium">Recent Quotes</h3>
-                <ul className="mt-2 space-y-2 text-sm">
-                  {quotes.slice(0, 10).map((q: any, idx: number) => (
-                    <li key={q.id ?? `quote-${idx}`}>
-                      {q.name} — {q.category} — {q.bill_range}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-4">
-                <h3 className="font-medium">Recent Contacts</h3>
-                <ul className="mt-2 space-y-2 text-sm">
-                  {contacts.slice(0, 10).map((c: any, idx: number) => (
-                    <li key={c.id ?? `contact-${idx}`}>
-                      {c.name} — {c.email}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {analytics && (
-                <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                  <div className="p-3 bg-gray-50 rounded">Total Quotes: <b>{analytics.totals?.quotes}</b></div>
-                  <div className="p-3 bg-gray-50 rounded">Total Contacts: <b>{analytics.totals?.contacts}</b></div>
-                  <div className="p-3 bg-gray-50 rounded">Total Jobs: <b>{analytics.totals?.jobs}</b></div>
-                  <div className="p-3 bg-gray-50 rounded">Total Resources: <b>{analytics.totals?.resources}</b></div>
-                </div>
-              )}
-            </div>
-
-            <div className="bg-white/80 p-6 rounded-xl shadow">
-              <h2 className="font-semibold mb-3">Jobs & Resources</h2>
-              <div className="flex gap-2 mb-4">
-                <Button onClick={() => download("jobs")}>Download Jobs</Button>
-                <Button onClick={() => download("resources")}>
-                  Download Resources
-                </Button>
-              </div>
-
-              <div>
-                <h3 className="font-medium">Existing Jobs</h3>
-                <ul className="mt-2 space-y-3 text-sm">
-                  {jobs.map((j: any, idx: number) => (
-                    <li key={j.id ?? `job-${idx}`} className="p-2 rounded border">
-                      {editingJobId === j.id ? (
-                        <div className="space-y-2">
-                          <Input placeholder="Title" value={editingJob.title} onChange={(e: any) => setEditingJob({ ...editingJob, title: e.target.value })} />
-                          <Input placeholder="Location" value={editingJob.location} onChange={(e: any) => setEditingJob({ ...editingJob, location: e.target.value })} />
-                          <Input placeholder="Employment Type" value={editingJob.employment_type} onChange={(e: any) => setEditingJob({ ...editingJob, employment_type: e.target.value })} />
-                          <Input placeholder="Department" value={editingJob.department} onChange={(e: any) => setEditingJob({ ...editingJob, department: e.target.value })} />
-                          <Textarea placeholder="Description" value={editingJob.description} onChange={(e: any) => setEditingJob({ ...editingJob, description: e.target.value })} />
-                          <Textarea placeholder="Requirements" value={editingJob.requirements} onChange={(e: any) => setEditingJob({ ...editingJob, requirements: e.target.value })} />
-                          <div className="flex gap-2">
-                            <Button size="sm" onClick={saveJob}>Save</Button>
-                            <Button size="sm" variant="outline" onClick={() => setEditingJobId(null)}>Cancel</Button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-between">
-                          <span>{j.title} — {j.location}</span>
-                          <div className="flex gap-2">
-                            <Button size="sm" variant="outline" onClick={() => startEditJob(j)}>Edit</Button>
-                            <Button size="sm" variant="destructive" onClick={() => deleteJob(j.id)}>Delete</Button>
-                          </div>
-                        </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-4">
-                <h3 className="font-medium">Resources</h3>
-                <ul className="mt-2 space-y-3 text-sm">
-                  {resources.map((r: any, idx: number) => (
-                    <li key={r.id ?? `resource-${idx}`} className="p-2 rounded border">
-                      {editingResourceId === r.id ? (
-                        <div className="space-y-2">
-                          <Input placeholder="Title" value={editingResource.title} onChange={(e: any) => setEditingResource({ ...editingResource, title: e.target.value })} />
-                          <Input placeholder="Type" value={editingResource.resource_type} onChange={(e: any) => setEditingResource({ ...editingResource, resource_type: e.target.value })} />
-                          <Input placeholder="File URL" value={editingResource.file_url} onChange={(e: any) => setEditingResource({ ...editingResource, file_url: e.target.value })} />
-                          <Textarea placeholder="Description" value={editingResource.description} onChange={(e: any) => setEditingResource({ ...editingResource, description: e.target.value })} />
-                          <div className="flex gap-2">
-                            <Button size="sm" onClick={saveResource}>Save</Button>
-                            <Button size="sm" variant="outline" onClick={() => setEditingResourceId(null)}>Cancel</Button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-between">
-                          <span>{r.title} — {r.resource_type}</span>
-                          <div className="flex gap-2">
-                            <Button size="sm" variant="outline" onClick={() => startEditResource(r)}>Edit</Button>
-                            <Button size="sm" variant="destructive" onClick={() => deleteResource(r.id)}>Delete</Button>
-                          </div>
-                        </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-          )}
-
-          {adminToken && (
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <form
-              onSubmit={submitJob}
-              className="bg-white/80 p-6 rounded-xl shadow space-y-3"
-            >
-              <h3 className="font-semibold">Add Job</h3>
-              <Input
-                placeholder="Title"
-                value={jobForm.title}
-                onChange={(e: any) =>
-                  setJobForm({ ...jobForm, title: e.target.value })
-                }
-              />
-              <Input
-                placeholder="Location"
-                value={jobForm.location}
-                onChange={(e: any) =>
-                  setJobForm({ ...jobForm, location: e.target.value })
-                }
-              />
-              <Input
-                placeholder="Employment Type"
-                value={jobForm.employment_type}
-                onChange={(e: any) =>
-                  setJobForm({ ...jobForm, employment_type: e.target.value })
-                }
-              />
-              <Input
-                placeholder="Department"
-                value={jobForm.department}
-                onChange={(e: any) =>
-                  setJobForm({ ...jobForm, department: e.target.value })
-                }
-              />
-              <Textarea
-                placeholder="Description"
-                value={jobForm.description}
-                onChange={(e: any) =>
-                  setJobForm({ ...jobForm, description: e.target.value })
-                }
-              />
-              <Textarea
-                placeholder="Requirements"
-                value={jobForm.requirements}
-                onChange={(e: any) =>
-                  setJobForm({ ...jobForm, requirements: e.target.value })
-                }
-              />
-              <Button type="submit">Create Job</Button>
-            </form>
-
-            <form
-              onSubmit={submitResource}
-              className="bg-white/80 p-6 rounded-xl shadow space-y-3"
-            >
-              <h3 className="font-semibold">Add Resource</h3>
-              <Input
-                placeholder="Title"
-                value={resourceForm.title}
-                onChange={(e: any) =>
-                  setResourceForm({ ...resourceForm, title: e.target.value })
-                }
-              />
-              <Input
-                placeholder="Type (whitepaper/pdf/link)"
-                value={resourceForm.resource_type}
-                onChange={(e: any) =>
-                  setResourceForm({
-                    ...resourceForm,
-                    resource_type: e.target.value,
-                  })
-                }
-              />
-
-              <div className="flex items-center gap-2">
-                <input
-                  id="resource-file"
-                  type="file"
-                  accept="*/*"
-                  onChange={(e: any) => {
-                    const f = e.target.files && e.target.files[0];
-                    handleFileChange(f);
-                  }}
-                />
-                <span className="text-sm text-muted-foreground">
-                  {uploading
-                    ? "Uploading..."
-                    : resourceForm.file_url
-                      ? "Uploaded"
-                      : "No file"}
-                </span>
-              </div>
-
-              <Input
-                placeholder="File URL (override)"
-                value={resourceForm.file_url}
-                onChange={(e: any) =>
-                  setResourceForm({ ...resourceForm, file_url: e.target.value })
-                }
-              />
-              <Textarea
-                placeholder="Description"
-                value={resourceForm.description}
-                onChange={(e: any) =>
-                  setResourceForm({
-                    ...resourceForm,
-                    description: e.target.value,
-                  })
-                }
-              />
-              <Button type="submit" disabled={uploading}>
-                Create Resource
+            <div className="mb-4 text-sm">
+              Logged in.{" "}
+              <Button
+                variant="outline"
+                onClick={() => {
+                  localStorage.removeItem("adminToken");
+                  window.location.href = "/login";
+                }}
+              >
+                Logout
               </Button>
-            </form>
-          </section>
+            </div>
+          )}
+
+          {adminToken && (
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white/80 p-6 rounded-xl shadow">
+                <h2 className="font-semibold mb-3">Submissions</h2>
+                <div className="flex gap-2">
+                  <Button onClick={() => download("quotes")}>
+                    Download Quotes
+                  </Button>
+                  <Button onClick={() => download("contacts")}>
+                    Download Contacts
+                  </Button>
+                  <Button variant="outline" onClick={downloadExcel}>
+                    Download All (Excel)
+                  </Button>
+                </div>
+                <div className="mt-4">
+                  <h3 className="font-medium">Recent Quotes</h3>
+                  <ul className="mt-2 space-y-2 text-sm">
+                    {quotes.slice(0, 10).map((q: any, idx: number) => (
+                      <li key={q.id ?? `quote-${idx}`}>
+                        {q.name} — {q.category} — {q.bill_range}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-4">
+                  <h3 className="font-medium">Recent Contacts</h3>
+                  <ul className="mt-2 space-y-2 text-sm">
+                    {contacts.slice(0, 10).map((c: any, idx: number) => (
+                      <li key={c.id ?? `contact-${idx}`}>
+                        {c.name} — {c.email}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {analytics && (
+                  <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Quotes: <b>{analytics.totals?.quotes}</b>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Contacts: <b>{analytics.totals?.contacts}</b>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Jobs: <b>{analytics.totals?.jobs}</b>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Resources: <b>{analytics.totals?.resources}</b>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white/80 p-6 rounded-xl shadow">
+                <h2 className="font-semibold mb-3">Jobs & Resources</h2>
+                <div className="flex gap-2 mb-4">
+                  <Button onClick={() => download("jobs")}>
+                    Download Jobs
+                  </Button>
+                  <Button onClick={() => download("resources")}>
+                    Download Resources
+                  </Button>
+                </div>
+
+                <div>
+                  <h3 className="font-medium">Existing Jobs</h3>
+                  <ul className="mt-2 space-y-3 text-sm">
+                    {jobs.map((j: any, idx: number) => (
+                      <li
+                        key={j.id ?? `job-${idx}`}
+                        className="p-2 rounded border"
+                      >
+                        {editingJobId === j.id ? (
+                          <div className="space-y-2">
+                            <Input
+                              placeholder="Title"
+                              value={editingJob.title}
+                              onChange={(e: any) =>
+                                setEditingJob({
+                                  ...editingJob,
+                                  title: e.target.value,
+                                })
+                              }
+                            />
+                            <Input
+                              placeholder="Location"
+                              value={editingJob.location}
+                              onChange={(e: any) =>
+                                setEditingJob({
+                                  ...editingJob,
+                                  location: e.target.value,
+                                })
+                              }
+                            />
+                            <Input
+                              placeholder="Employment Type"
+                              value={editingJob.employment_type}
+                              onChange={(e: any) =>
+                                setEditingJob({
+                                  ...editingJob,
+                                  employment_type: e.target.value,
+                                })
+                              }
+                            />
+                            <Input
+                              placeholder="Department"
+                              value={editingJob.department}
+                              onChange={(e: any) =>
+                                setEditingJob({
+                                  ...editingJob,
+                                  department: e.target.value,
+                                })
+                              }
+                            />
+                            <Textarea
+                              placeholder="Description"
+                              value={editingJob.description}
+                              onChange={(e: any) =>
+                                setEditingJob({
+                                  ...editingJob,
+                                  description: e.target.value,
+                                })
+                              }
+                            />
+                            <Textarea
+                              placeholder="Requirements"
+                              value={editingJob.requirements}
+                              onChange={(e: any) =>
+                                setEditingJob({
+                                  ...editingJob,
+                                  requirements: e.target.value,
+                                })
+                              }
+                            />
+                            <div className="flex gap-2">
+                              <Button size="sm" onClick={saveJob}>
+                                Save
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => setEditingJobId(null)}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-between">
+                            <span>
+                              {j.title} — {j.location}
+                            </span>
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => startEditJob(j)}
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => deleteJob(j.id)}
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-4">
+                  <h3 className="font-medium">Resources</h3>
+                  <ul className="mt-2 space-y-3 text-sm">
+                    {resources.map((r: any, idx: number) => (
+                      <li
+                        key={r.id ?? `resource-${idx}`}
+                        className="p-2 rounded border"
+                      >
+                        {editingResourceId === r.id ? (
+                          <div className="space-y-2">
+                            <Input
+                              placeholder="Title"
+                              value={editingResource.title}
+                              onChange={(e: any) =>
+                                setEditingResource({
+                                  ...editingResource,
+                                  title: e.target.value,
+                                })
+                              }
+                            />
+                            <Input
+                              placeholder="Type"
+                              value={editingResource.resource_type}
+                              onChange={(e: any) =>
+                                setEditingResource({
+                                  ...editingResource,
+                                  resource_type: e.target.value,
+                                })
+                              }
+                            />
+                            <Input
+                              placeholder="File URL"
+                              value={editingResource.file_url}
+                              onChange={(e: any) =>
+                                setEditingResource({
+                                  ...editingResource,
+                                  file_url: e.target.value,
+                                })
+                              }
+                            />
+                            <Textarea
+                              placeholder="Description"
+                              value={editingResource.description}
+                              onChange={(e: any) =>
+                                setEditingResource({
+                                  ...editingResource,
+                                  description: e.target.value,
+                                })
+                              }
+                            />
+                            <div className="flex gap-2">
+                              <Button size="sm" onClick={saveResource}>
+                                Save
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => setEditingResourceId(null)}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-between">
+                            <span>
+                              {r.title} — {r.resource_type}
+                            </span>
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => startEditResource(r)}
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => deleteResource(r.id)}
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {adminToken && (
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <form
+                onSubmit={submitJob}
+                className="bg-white/80 p-6 rounded-xl shadow space-y-3"
+              >
+                <h3 className="font-semibold">Add Job</h3>
+                <Input
+                  placeholder="Title"
+                  value={jobForm.title}
+                  onChange={(e: any) =>
+                    setJobForm({ ...jobForm, title: e.target.value })
+                  }
+                />
+                <Input
+                  placeholder="Location"
+                  value={jobForm.location}
+                  onChange={(e: any) =>
+                    setJobForm({ ...jobForm, location: e.target.value })
+                  }
+                />
+                <Input
+                  placeholder="Employment Type"
+                  value={jobForm.employment_type}
+                  onChange={(e: any) =>
+                    setJobForm({ ...jobForm, employment_type: e.target.value })
+                  }
+                />
+                <Input
+                  placeholder="Department"
+                  value={jobForm.department}
+                  onChange={(e: any) =>
+                    setJobForm({ ...jobForm, department: e.target.value })
+                  }
+                />
+                <Textarea
+                  placeholder="Description"
+                  value={jobForm.description}
+                  onChange={(e: any) =>
+                    setJobForm({ ...jobForm, description: e.target.value })
+                  }
+                />
+                <Textarea
+                  placeholder="Requirements"
+                  value={jobForm.requirements}
+                  onChange={(e: any) =>
+                    setJobForm({ ...jobForm, requirements: e.target.value })
+                  }
+                />
+                <Button type="submit">Create Job</Button>
+              </form>
+
+              <form
+                onSubmit={submitResource}
+                className="bg-white/80 p-6 rounded-xl shadow space-y-3"
+              >
+                <h3 className="font-semibold">Add Resource</h3>
+                <Input
+                  placeholder="Title"
+                  value={resourceForm.title}
+                  onChange={(e: any) =>
+                    setResourceForm({ ...resourceForm, title: e.target.value })
+                  }
+                />
+                <Input
+                  placeholder="Type (whitepaper/pdf/link)"
+                  value={resourceForm.resource_type}
+                  onChange={(e: any) =>
+                    setResourceForm({
+                      ...resourceForm,
+                      resource_type: e.target.value,
+                    })
+                  }
+                />
+
+                <div className="flex items-center gap-2">
+                  <input
+                    id="resource-file"
+                    type="file"
+                    accept="*/*"
+                    onChange={(e: any) => {
+                      const f = e.target.files && e.target.files[0];
+                      handleFileChange(f);
+                    }}
+                  />
+                  <span className="text-sm text-muted-foreground">
+                    {uploading
+                      ? "Uploading..."
+                      : resourceForm.file_url
+                        ? "Uploaded"
+                        : "No file"}
+                  </span>
+                </div>
+
+                <Input
+                  placeholder="File URL (override)"
+                  value={resourceForm.file_url}
+                  onChange={(e: any) =>
+                    setResourceForm({
+                      ...resourceForm,
+                      file_url: e.target.value,
+                    })
+                  }
+                />
+                <Textarea
+                  placeholder="Description"
+                  value={resourceForm.description}
+                  onChange={(e: any) =>
+                    setResourceForm({
+                      ...resourceForm,
+                      description: e.target.value,
+                    })
+                  }
+                />
+                <Button type="submit" disabled={uploading}>
+                  Create Resource
+                </Button>
+              </form>
+            </section>
           )}
         </div>
       </main>

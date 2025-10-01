@@ -51,7 +51,8 @@ export default function FloatingActionButton() {
       icon: Mail,
       label: "Email",
       color: "bg-sky-500 hover:bg-sky-600",
-      onClick: () => (window.location.href = "mailto:axisogreenenergy@gmail.com"),
+      onClick: () =>
+        (window.location.href = "mailto:axisogreenenergy@gmail.com"),
     },
     {
       icon: Phone,

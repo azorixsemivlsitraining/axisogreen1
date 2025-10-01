@@ -29,8 +29,8 @@ export default function Privacy() {
               <p>
                 At <span className="font-medium">AXISO Green Energy</span>, we
                 value your privacy and are committed to protecting your personal
-                information. This Privacy Policy explains how we collect, use, and
-                safeguard your data when you interact with our website and
+                information. This Privacy Policy explains how we collect, use,
+                and safeguard your data when you interact with our website and
                 services.
               </p>
             </div>
@@ -52,8 +52,9 @@ export default function Privacy() {
                   experience.
                 </li>
                 <li>
-                  <span className="font-medium">Cookies:</span> small files stored
-                  on your device to remember preferences and track performance.
+                  <span className="font-medium">Cookies:</span> small files
+                  stored on your device to remember preferences and track
+                  performance.
                 </li>
               </ul>
             </div>
@@ -78,9 +79,10 @@ export default function Privacy() {
               </h2>
               <p>
                 We implement industry-standard security measures to protect your
-                personal data from unauthorized access, disclosure, alteration, or
-                destruction. However, no method of transmission over the internet
-                is 100% secure, and we cannot guarantee absolute security.
+                personal data from unauthorized access, disclosure, alteration,
+                or destruction. However, no method of transmission over the
+                internet is 100% secure, and we cannot guarantee absolute
+                security.
               </p>
             </div>
 
@@ -90,9 +92,9 @@ export default function Privacy() {
                 Your Rights
               </h2>
               <p>
-                You have the right to access, update, or request deletion of your
-                personal information. To exercise these rights, please contact us
-                at{" "}
+                You have the right to access, update, or request deletion of
+                your personal information. To exercise these rights, please
+                contact us at{" "}
                 <a
                   href="mailto:privacy@axisogreen.in"
                   className="text-solar-600 underline"
@@ -121,8 +123,8 @@ export default function Privacy() {
                 Contact Us
               </h2>
               <p>
-                If you have any questions regarding this Privacy Policy or how we
-                handle your data, please contact us at{" "}
+                If you have any questions regarding this Privacy Policy or how
+                we handle your data, please contact us at{" "}
                 <a
                   href="mailto:info@axisogreen.in"
                   className="text-solar-600 underline"
