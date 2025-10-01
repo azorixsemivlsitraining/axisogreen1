@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram, ArrowUp } from "lucide-react";
+import { Facebook, Linkedin, Instagram, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Footer() {
@@ -35,10 +35,21 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    {
+      icon: Facebook,
+      href: "https://www.facebook.com/people/Axiso-Green-Energy/61567136736900/?rdid=lzUX5nBf2lTLnktE&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1D16TL1Fkc%2F",
+      label: "Facebook",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/axisogreen/",
+      label: "LinkedIn",
+    },
+    {
+      icon: Instagram,
+      href: "https://www.instagram.com/axisogreenenergy/?igsh=MTQ1dTR2OWFiYWU2Zw%3D%3D#",
+      label: "Instagram",
+    },
   ];
 
   return (
@@ -57,13 +68,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
           {/* Company info */}
           <div className="lg:col-span-2">
-            <a
-              href="https://91b60229d6a44020b906ca591dab5c2a-e71b4f2d-86b6-4075-9f86-e53b2f.fly.dev/"
-              className="flex flex-col items-start mb-6 select-none"
-            >
+            <Link to="#" className="flex flex-col items-start mb-6 select-none">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe9b318f844124426beb12ccd67e6243b?format=webp&width=800"
-                alt="AXIS Green Energy logo"
+                alt="AXISO Green Energy logo"
                 className="h-[110px] md:h-[120px] w-auto object-contain filter brightness-110 contrast-125 saturate-125 drop-shadow-md select-none"
                 loading="lazy"
                 decoding="async"
@@ -71,7 +79,7 @@ export default function Footer() {
               <span className="mt-3 text-xl font-bold text-white">
                 AXISO Green Energies Pvt. Ltd.
               </span>
-            </a>
+            </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               Leading the transition to sustainable energy with innovative
               renewable solutions for a cleaner, greener future.
@@ -84,6 +92,8 @@ export default function Footer() {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-white/10 hover:bg-primary transition-colors p-2 rounded-lg"
                   >
                     <IconComponent className="h-5 w-5" />
@@ -187,8 +197,8 @@ export default function Footer() {
           <p>&copy; 2024 Axiso Green Energies. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <span>Certified ISO 14001</span>
-            <span>NABCEP Accredited</span>
-            <span>OSHA Compliant</span>
+            <span>Certified ISO 9001</span>
+            <span>TGREDCO Certified</span>
           </div>
         </div>
       </div>

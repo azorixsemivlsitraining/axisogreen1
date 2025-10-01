@@ -303,16 +303,17 @@ export default function Careers() {
         "Wellness Programs",
       ],
     },
-    {
-      icon: DollarSign,
-      title: "Financial",
-      items: [
-        "Competitive Salary",
-        "401k with Match",
-        "Stock Options",
-        "Performance Bonuses",
-      ],
-    },
+  {
+  icon: () => <span className="text-xl font-bold">₹</span>, // Use text instead of DollarSign icon
+  title: "Financial",
+  items: [
+    "Competitive Salary",
+    "401k with Match",
+    "Stock Options",
+    "Performance Bonuses",
+  ],
+},
+
     {
       icon: Clock,
       title: "Work-Life Balance",
@@ -604,10 +605,12 @@ export default function Careers() {
                             <Trophy className="w-4 h-4" />
                             {job.experience}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <DollarSign className="w-4 h-4" />
-                            {job.salary}
-                          </div>
+<div className="flex items-center gap-1">
+  <span className="w-4 h-4 flex items-center justify-center text-primary font-bold">₹</span>
+  {job.salary.replace(/\$/g, '₹')}
+</div>
+
+
                         </div>
                       </div>
 

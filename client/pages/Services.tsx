@@ -5,7 +5,7 @@ export default function Services() {
     <PlaceholderPage
       title="Our Services"
       description="Comprehensive renewable energy solutions tailored to your needs."
-      pageName="services"
+      pageName="Services"
     />
   );
 }
