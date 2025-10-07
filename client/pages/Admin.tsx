@@ -321,6 +321,51 @@ export default function Admin() {
     }
   };
 
+  function DataTable({ rows, preferred, emptyLabel }: { rows: any[]; preferred: string[]; emptyLabel: string }) {
+    const cols = React.useMemo(() => {
+      const first = rows && rows[0];
+      const keys = first ? Object.keys(first) : [];
+      const ordered = Array.from(new Set([...(preferred || []), ...keys]));
+      return ordered.slice(0, 8);
+    }, [rows, preferred]);
+
+    if (!rows || rows.length === 0) {
+      return <div className="text-sm text-muted-foreground">{emptyLabel}</div>;
+    }
+
+    return (
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {cols.map((c) => (
+              <TableHead key={c} className="capitalize">{c.replace(/_/g, " ")}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((r, idx) => (
+            <TableRow key={r.id ?? idx}>
+              {cols.map((c) => (
+                <TableCell key={c}>
+                  {formatCell(r[c])}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableCaption>{rows.length} records</TableCaption>
+      </Table>
+    );
+  }
+
+  function formatCell(v: any) {
+    if (v === null || v === undefined) return "";
+    if (typeof v === "string") return v;
+    if (typeof v === "number" || typeof v === "boolean") return String(v);
+    if (v instanceof Date) return v.toISOString();
+    return JSON.stringify(v);
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
