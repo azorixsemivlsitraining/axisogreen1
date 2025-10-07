@@ -349,270 +349,74 @@ export default function Admin() {
           )}
 
           {adminToken && (
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <section className="mb-8">
               <div className="bg-white/80 p-6 rounded-xl shadow">
-                <h2 className="font-semibold mb-3">Submissions</h2>
-                <div className="flex gap-2">
-                  <Button onClick={() => download("quotes")}>
-                    Download Quotes
-                  </Button>
-                  <Button onClick={() => download("contacts")}>
-                    Download Contacts
-                  </Button>
-                  <Button variant="outline" onClick={downloadExcel}>
-                    Download All (Excel)
-                  </Button>
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <h2 className="font-semibold">Submissions</h2>
+                  <div className="flex gap-2">
+                    <Button variant="outline" onClick={downloadExcel}>
+                      Download All (Excel)
+                    </Button>
+                  </div>
                 </div>
-                <div className="mt-4">
-                  <h3 className="font-medium">Recent Quotes</h3>
-                  <ul className="mt-2 space-y-2 text-sm">
-                    {quotes.slice(0, 10).map((q: any, idx: number) => (
-                      <li key={q.id ?? `quote-${idx}`}>
-                        {q.name} — {q.category} — {q.bill_range}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-4">
-                  <h3 className="font-medium">Recent Contacts</h3>
-                  <ul className="mt-2 space-y-2 text-sm">
-                    {contacts.slice(0, 10).map((c: any, idx: number) => (
-                      <li key={c.id ?? `contact-${idx}`}>
-                        {c.name} — {c.email}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
                 {analytics && (
-                  <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
-                    <div className="p-3 bg-gray-50 rounded">
-                      Total Quotes: <b>{analytics.totals?.quotes}</b>
-                    </div>
-                    <div className="p-3 bg-gray-50 rounded">
-                      Total Contacts: <b>{analytics.totals?.contacts}</b>
-                    </div>
-                    <div className="p-3 bg-gray-50 rounded">
-                      Total Jobs: <b>{analytics.totals?.jobs}</b>
-                    </div>
-                    <div className="p-3 bg-gray-50 rounded">
-                      Total Resources: <b>{analytics.totals?.resources}</b>
-                    </div>
+                  <div className="mb-4 grid grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+                    <div className="p-3 bg-gray-50 rounded">Total Quotes: <b>{analytics.totals?.quotes}</b></div>
+                    <div className="p-3 bg-gray-50 rounded">Total Contacts: <b>{analytics.totals?.contacts}</b></div>
+                    <div className="p-3 bg-gray-50 rounded">Total Jobs: <b>{analytics.totals?.jobs}</b></div>
+                    <div className="p-3 bg-gray-50 rounded">Total Resources: <b>{analytics.totals?.resources}</b></div>
                   </div>
                 )}
-              </div>
 
-              <div className="bg-white/80 p-6 rounded-xl shadow">
-                <h2 className="font-semibold mb-3">Jobs & Resources</h2>
-                <div className="flex gap-2 mb-4">
-                  <Button onClick={() => download("jobs")}>
-                    Download Jobs
-                  </Button>
-                  <Button onClick={() => download("resources")}>
-                    Download Resources
-                  </Button>
-                </div>
+                <Tabs defaultValue="quotes">
+                  <TabsList className="mb-4">
+                    <TabsTrigger value="quotes">Quotes</TabsTrigger>
+                    <TabsTrigger value="contacts">Contacts</TabsTrigger>
+                    <TabsTrigger value="jobs">Applications</TabsTrigger>
+                    <TabsTrigger value="resources">Resources</TabsTrigger>
+                  </TabsList>
 
-                <div>
-                  <h3 className="font-medium">Existing Jobs</h3>
-                  <ul className="mt-2 space-y-3 text-sm">
-                    {jobs.map((j: any, idx: number) => (
-                      <li
-                        key={j.id ?? `job-${idx}`}
-                        className="p-2 rounded border"
-                      >
-                        {editingJobId === j.id ? (
-                          <div className="space-y-2">
-                            <Input
-                              placeholder="Title"
-                              value={editingJob.title}
-                              onChange={(e: any) =>
-                                setEditingJob({
-                                  ...editingJob,
-                                  title: e.target.value,
-                                })
-                              }
-                            />
-                            <Input
-                              placeholder="Location"
-                              value={editingJob.location}
-                              onChange={(e: any) =>
-                                setEditingJob({
-                                  ...editingJob,
-                                  location: e.target.value,
-                                })
-                              }
-                            />
-                            <Input
-                              placeholder="Employment Type"
-                              value={editingJob.employment_type}
-                              onChange={(e: any) =>
-                                setEditingJob({
-                                  ...editingJob,
-                                  employment_type: e.target.value,
-                                })
-                              }
-                            />
-                            <Input
-                              placeholder="Department"
-                              value={editingJob.department}
-                              onChange={(e: any) =>
-                                setEditingJob({
-                                  ...editingJob,
-                                  department: e.target.value,
-                                })
-                              }
-                            />
-                            <Textarea
-                              placeholder="Description"
-                              value={editingJob.description}
-                              onChange={(e: any) =>
-                                setEditingJob({
-                                  ...editingJob,
-                                  description: e.target.value,
-                                })
-                              }
-                            />
-                            <Textarea
-                              placeholder="Requirements"
-                              value={editingJob.requirements}
-                              onChange={(e: any) =>
-                                setEditingJob({
-                                  ...editingJob,
-                                  requirements: e.target.value,
-                                })
-                              }
-                            />
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={saveJob}>
-                                Save
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => setEditingJobId(null)}
-                              >
-                                Cancel
-                              </Button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex items-center justify-between">
-                            <span>
-                              {j.title} — {j.location}
-                            </span>
-                            <div className="flex gap-2">
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => startEditJob(j)}
-                              >
-                                Edit
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="destructive"
-                                onClick={() => deleteJob(j.id)}
-                              >
-                                Delete
-                              </Button>
-                            </div>
-                          </div>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <TabsContent value="quotes">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-medium">Quotes</h3>
+                      <Button size="sm" onClick={() => download("quotes")}>
+                        Download CSV
+                      </Button>
+                    </div>
+                    <DataTable rows={quotes} preferred={["id","name","category","bill","bill_range","whatsapp","pincode","created_at"]} emptyLabel="No quotes" />
+                  </TabsContent>
 
-                <div className="mt-4">
-                  <h3 className="font-medium">Resources</h3>
-                  <ul className="mt-2 space-y-3 text-sm">
-                    {resources.map((r: any, idx: number) => (
-                      <li
-                        key={r.id ?? `resource-${idx}`}
-                        className="p-2 rounded border"
-                      >
-                        {editingResourceId === r.id ? (
-                          <div className="space-y-2">
-                            <Input
-                              placeholder="Title"
-                              value={editingResource.title}
-                              onChange={(e: any) =>
-                                setEditingResource({
-                                  ...editingResource,
-                                  title: e.target.value,
-                                })
-                              }
-                            />
-                            <Input
-                              placeholder="Type"
-                              value={editingResource.resource_type}
-                              onChange={(e: any) =>
-                                setEditingResource({
-                                  ...editingResource,
-                                  resource_type: e.target.value,
-                                })
-                              }
-                            />
-                            <Input
-                              placeholder="File URL"
-                              value={editingResource.file_url}
-                              onChange={(e: any) =>
-                                setEditingResource({
-                                  ...editingResource,
-                                  file_url: e.target.value,
-                                })
-                              }
-                            />
-                            <Textarea
-                              placeholder="Description"
-                              value={editingResource.description}
-                              onChange={(e: any) =>
-                                setEditingResource({
-                                  ...editingResource,
-                                  description: e.target.value,
-                                })
-                              }
-                            />
-                            <div className="flex gap-2">
-                              <Button size="sm" onClick={saveResource}>
-                                Save
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => setEditingResourceId(null)}
-                              >
-                                Cancel
-                              </Button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex items-center justify-between">
-                            <span>
-                              {r.title} — {r.resource_type}
-                            </span>
-                            <div className="flex gap-2">
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => startEditResource(r)}
-                              >
-                                Edit
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="destructive"
-                                onClick={() => deleteResource(r.id)}
-                              >
-                                Delete
-                              </Button>
-                            </div>
-                          </div>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <TabsContent value="contacts">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-medium">Contacts</h3>
+                      <Button size="sm" onClick={() => download("contacts")}>
+                        Download CSV
+                      </Button>
+                    </div>
+                    <DataTable rows={contacts} preferred={["id","name","email","phone","message","created_at"]} emptyLabel="No contacts" />
+                  </TabsContent>
+
+                  <TabsContent value="jobs">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-medium">Applications</h3>
+                      <Button size="sm" onClick={() => download("jobs")}>
+                        Download CSV
+                      </Button>
+                    </div>
+                    <DataTable rows={jobs} preferred={["id","title","location","employment_type","department","created_at"]} emptyLabel="No items" />
+                  </TabsContent>
+
+                  <TabsContent value="resources">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-medium">Resources</h3>
+                      <Button size="sm" onClick={() => download("resources")}>
+                        Download CSV
+                      </Button>
+                    </div>
+                    <DataTable rows={resources} preferred={["id","title","resource_type","file_url","description","created_at"]} emptyLabel="No resources" />
+                  </TabsContent>
+                </Tabs>
               </div>
             </section>
           )}
