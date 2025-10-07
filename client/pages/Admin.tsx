@@ -321,7 +321,15 @@ export default function Admin() {
     }
   };
 
-  function DataTable({ rows, preferred, emptyLabel }: { rows: any[]; preferred: string[]; emptyLabel: string }) {
+  function DataTable({
+    rows,
+    preferred,
+    emptyLabel,
+  }: {
+    rows: any[];
+    preferred: string[];
+    emptyLabel: string;
+  }) {
     const cols = React.useMemo(() => {
       const first = rows && rows[0];
       const keys = first ? Object.keys(first) : [];
@@ -338,7 +346,9 @@ export default function Admin() {
         <TableHeader>
           <TableRow>
             {cols.map((c) => (
-              <TableHead key={c} className="capitalize">{c.replace(/_/g, " ")}</TableHead>
+              <TableHead key={c} className="capitalize">
+                {c.replace(/_/g, " ")}
+              </TableHead>
             ))}
           </TableRow>
         </TableHeader>
@@ -346,9 +356,7 @@ export default function Admin() {
           {rows.map((r, idx) => (
             <TableRow key={r.id ?? idx}>
               {cols.map((c) => (
-                <TableCell key={c}>
-                  {formatCell(r[c])}
-                </TableCell>
+                <TableCell key={c}>{formatCell(r[c])}</TableCell>
               ))}
             </TableRow>
           ))}
@@ -407,10 +415,18 @@ export default function Admin() {
 
                 {analytics && (
                   <div className="mb-4 grid grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
-                    <div className="p-3 bg-gray-50 rounded">Total Quotes: <b>{analytics.totals?.quotes}</b></div>
-                    <div className="p-3 bg-gray-50 rounded">Total Contacts: <b>{analytics.totals?.contacts}</b></div>
-                    <div className="p-3 bg-gray-50 rounded">Total Jobs: <b>{analytics.totals?.jobs}</b></div>
-                    <div className="p-3 bg-gray-50 rounded">Total Resources: <b>{analytics.totals?.resources}</b></div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Quotes: <b>{analytics.totals?.quotes}</b>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Contacts: <b>{analytics.totals?.contacts}</b>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Jobs: <b>{analytics.totals?.jobs}</b>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded">
+                      Total Resources: <b>{analytics.totals?.resources}</b>
+                    </div>
                   </div>
                 )}
 
@@ -429,7 +445,20 @@ export default function Admin() {
                         Download CSV
                       </Button>
                     </div>
-                    <DataTable rows={quotes} preferred={["id","name","category","bill","bill_range","whatsapp","pincode","created_at"]} emptyLabel="No quotes" />
+                    <DataTable
+                      rows={quotes}
+                      preferred={[
+                        "id",
+                        "name",
+                        "category",
+                        "bill",
+                        "bill_range",
+                        "whatsapp",
+                        "pincode",
+                        "created_at",
+                      ]}
+                      emptyLabel="No quotes"
+                    />
                   </TabsContent>
 
                   <TabsContent value="contacts">
@@ -439,7 +468,18 @@ export default function Admin() {
                         Download CSV
                       </Button>
                     </div>
-                    <DataTable rows={contacts} preferred={["id","name","email","phone","message","created_at"]} emptyLabel="No contacts" />
+                    <DataTable
+                      rows={contacts}
+                      preferred={[
+                        "id",
+                        "name",
+                        "email",
+                        "phone",
+                        "message",
+                        "created_at",
+                      ]}
+                      emptyLabel="No contacts"
+                    />
                   </TabsContent>
 
                   <TabsContent value="jobs">
@@ -449,7 +489,18 @@ export default function Admin() {
                         Download CSV
                       </Button>
                     </div>
-                    <DataTable rows={jobs} preferred={["id","title","location","employment_type","department","created_at"]} emptyLabel="No items" />
+                    <DataTable
+                      rows={jobs}
+                      preferred={[
+                        "id",
+                        "title",
+                        "location",
+                        "employment_type",
+                        "department",
+                        "created_at",
+                      ]}
+                      emptyLabel="No items"
+                    />
                   </TabsContent>
 
                   <TabsContent value="resources">
@@ -459,7 +510,18 @@ export default function Admin() {
                         Download CSV
                       </Button>
                     </div>
-                    <DataTable rows={resources} preferred={["id","title","resource_type","file_url","description","created_at"]} emptyLabel="No resources" />
+                    <DataTable
+                      rows={resources}
+                      preferred={[
+                        "id",
+                        "title",
+                        "resource_type",
+                        "file_url",
+                        "description",
+                        "created_at",
+                      ]}
+                      emptyLabel="No resources"
+                    />
                   </TabsContent>
                 </Tabs>
               </div>
