@@ -14,7 +14,7 @@ function upsertMeta(selector: string, attrs: Record<string, string>) {
   Object.entries(attrs).forEach(([k, v]) => (el as any).setAttribute(k, v));
 }
 
-const SITE_NAME = "AXISO Green Energies";
+const SITE_NAME = "Axiso Green";
 const DEFAULT_IMAGE =
   "https://cdn.builder.io/api/v1/image/assets%2F59bf3e928fc9473a97d5e87470c824bb%2F661e86d7a74f464c89095a37afa49cbd?format=webp&width=1200";
 
@@ -23,51 +23,111 @@ const routeMeta: Record<
   { title: string; description: string; keywords?: string }
 > = {
   "/": {
-    title: `${SITE_NAME} — Clean Energy Solutions`,
+    title: "Clean Energy Solutions | Axiso Green",
     description:
-      "Solar, wind, and smart energy solutions delivering maximum efficiency, reliability, and cost savings.",
+      "Axiso Green delivers sustainable energy solutions, solar installations, and green technologies to power homes, industries, and communities efficiently.",
     keywords:
       "solar energy, renewable energy, rooftop solar, wind power, energy storage, EV charging, smart energy",
   },
-  "/solutions": {
-    title: `Solutions | ${SITE_NAME}`,
-    description:
-      "Explore solar, wind, energy storage, and EV charging solutions tailored for homes, businesses, and government.",
-  },
   "/about": {
-    title: `About Us | ${SITE_NAME}`,
+    title: "About Axiso Green | Renewable Energy Experts",
     description:
-      "Learn about our mission to accelerate sustainable energy adoption with innovative, reliable solutions.",
+      "Learn how Axiso Green pioneers renewable energy solutions, solar power systems, and sustainable practices for a cleaner, greener future.",
+  },
+  "/solutions": {
+    title: "Renewable Energy Services | Axiso Green",
+    description:
+      "Explore our comprehensive clean energy services including solar power systems, energy audits, and sustainable energy solutions tailored for homes and businesses.",
+  },
+  "/services": {
+    title: "Renewable Energy Services | Axiso Green",
+    description:
+      "Explore our comprehensive clean energy services including solar power systems, energy audits, and sustainable energy solutions tailored for homes and businesses.",
+  },
+  "/solutions/solar": {
+    title: "Solar Energy Systems & Solutions | Axiso Green",
+    description:
+      "Harness the power of the sun with Axiso Green’s custom solar panel installations, solar rooftop solutions, and energy-efficient systems.",
+  },
+  "/solutions/b2b": {
+    title: "Industrial Renewable Energy Solutions | Axiso Green",
+    description:
+      "Maximize efficiency with Axiso Green’s industrial energy solutions, including solar plants, energy optimization, and green technology integration.",
+  },
+  "/solutions/b2c": {
+    title: "Residential Solar & Clean Energy | Axiso Green",
+    description:
+      "Power your home sustainably with solar installations, energy-efficient solutions, and renewable energy systems from Axiso Green.",
+  },
+  "/projects": {
+    title: "Renewable Energy Projects | Axiso Green",
+    description:
+      "Discover successful solar and green energy projects delivered by Axiso Green, showcasing innovation, efficiency, and sustainable outcomes.",
+  },
+  "/case-studies": {
+    title: "Renewable Energy Projects | Axiso Green",
+    description:
+      "Discover successful solar and green energy projects delivered by Axiso Green, showcasing innovation, efficiency, and sustainable outcomes.",
+  },
+  "/products": {
+    title: "Solar Products & Green Energy Equipment | Axiso Green",
+    description:
+      "Explore high-quality solar panels, inverters, batteries, and renewable energy equipment designed for maximum efficiency and reliability.",
+  },
+  "/resources": {
+    title: "Clean Energy Insights & Updates | Axiso Green",
+    description:
+      "Stay updated on renewable energy trends, solar technologies, sustainability tips, and industry innovations from Axiso Green.",
+  },
+  "/blog": {
+    title: "Clean Energy Insights & Updates | Axiso Green",
+    description:
+      "Stay updated on renewable energy trends, solar technologies, sustainability tips, and industry innovations from Axiso Green.",
+  },
+  "/insights": {
+    title: "Clean Energy Insights & Updates | Axiso Green",
+    description:
+      "Stay updated on renewable energy trends, solar technologies, sustainability tips, and industry innovations from Axiso Green.",
   },
   "/contact": {
-    title: `Contact | ${SITE_NAME}`,
+    title: "Contact Axiso Green | Renewable Energy Experts",
     description:
-      "Contact our experts for a free consultation, pricing, or help with your renewable energy project.",
+      "Get in touch with Axiso Green to discuss solar installations, energy solutions, or request a consultation for sustainable energy projects.",
+  },
+  "/faq": {
+    title: "Renewable Energy FAQs | Axiso Green",
+    description:
+      "Find answers to common questions about solar energy, installation processes, green technologies, and sustainable solutions from Axiso Green.",
+  },
+  "/careers": {
+    title: "Careers at Axiso Green | Join Renewable Energy Experts",
+    description:
+      "Explore career opportunities in clean energy, sustainability, and solar technology with Axiso Green.",
+  },
+  "/testimonials": {
+    title: "Client Testimonials | Axiso Green",
+    description:
+      "Hear from our satisfied clients about the efficiency, reliability, and sustainability of Axiso Green’s solar and clean energy solutions.",
+  },
+  "/partners": {
+    title: "Our Green Partners | Axiso Green",
+    description:
+      "Collaborating with top renewable energy companies and technology providers to deliver innovative solar and energy solutions.",
+  },
+  "/gallery": {
+    title: "Solar Projects & Installations Gallery | Axiso Green",
+    description:
+      "Browse images of Axiso Green’s solar projects, installations, and renewable energy solutions for homes, industries, and communities.",
   },
   "/sectors": {
     title: `Industries | ${SITE_NAME}`,
     description:
       "Industry-specific renewable energy solutions for residential, commercial, and government sectors.",
   },
-  "/resources": {
-    title: `Resources | ${SITE_NAME}`,
-    description:
-      "Guides, articles, and updates on solar, wind, storage, and sustainable practices.",
-  },
-  "/careers": {
-    title: `Careers | ${SITE_NAME}`,
-    description:
-      "Join our mission-driven team building a sustainable energy future.",
-  },
   "/get-quote": {
     title: `Get Quote | ${SITE_NAME}`,
     description:
       "Request a personalized quote for solar, wind, or storage solutions.",
-  },
-  "/solutions/solar": {
-    title: `Solar Solutions | ${SITE_NAME}`,
-    description:
-      "High-efficiency solar systems for homes, businesses, and government.",
   },
   "/solutions/wind": {
     title: `Wind Solutions | ${SITE_NAME}`,
@@ -82,16 +142,6 @@ const routeMeta: Record<
     title: `EV Charging Stations | ${SITE_NAME}`,
     description:
       "Smart EV charging infrastructure for homes, fleets, and public sites.",
-  },
-  "/solutions/b2b": {
-    title: `Commercial (B2B) Solar | ${SITE_NAME}`,
-    description:
-      "End-to-end commercial solar and energy optimization services.",
-  },
-  "/solutions/b2c": {
-    title: `Residential (B2C) Solar | ${SITE_NAME}`,
-    description:
-      "Rooftop solar for homeowners with financing and maintenance options.",
   },
   "/solutions/b2g": {
     title: `Government (B2G) Solar | ${SITE_NAME}`,
@@ -139,7 +189,7 @@ export function SEOProvider() {
     const meta = routeMeta[path] ?? {
       title: `${SITE_NAME} | ${path.replace(/\//g, " ").trim() || "Home"}`,
       description:
-        "Renewable energy solutions including solar, wind, storage, and EV charging backed by expert advisory.",
+        "Axiso Green delivers tailored renewable energy solutions including solar, wind, storage, and EV charging backed by expert advisory.",
     };
 
     const url = `${window.location.origin}${path}${window.location.search}`;

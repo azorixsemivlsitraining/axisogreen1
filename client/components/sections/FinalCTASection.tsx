@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function FinalCTASection() {
   const ref = useRef(null);
@@ -134,13 +135,16 @@ export default function FinalCTASection() {
               }}
             >
               <Button
-                size="lg"
-                variant="secondary"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
-              >
-                Request a Quote
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
+  asChild
+  size="lg"
+  variant="secondary"
+  className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
+>
+  <Link to="/get-quote">
+    Request a Quote
+    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+  </Link>
+</Button>
             </motion.div>
 
             <motion.div
@@ -165,12 +169,15 @@ export default function FinalCTASection() {
               }}
             >
               <Button
-                size="lg"
-                variant="outline"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
-              >
-                Book Consultation
-              </Button>
+  asChild
+  size="lg"
+  variant="outline"
+  className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
+>
+  <Link to="/contact">
+    Book Consultation
+  </Link>
+</Button>
             </motion.div>
           </motion.div>
 
@@ -186,7 +193,7 @@ export default function FinalCTASection() {
                 <Phone className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Call Us</h3>
-              <p className="opacity-90">+1 (555) 123-4567</p>
+              <p className="opacity-90">090634 47838</p>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} className="text-center">
@@ -194,7 +201,7 @@ export default function FinalCTASection() {
                 <Mail className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Email Us</h3>
-              <p className="opacity-90">info@axisogreen.com</p>
+              <p className="opacity-90">contact@axisogreen.in</p>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} className="text-center">

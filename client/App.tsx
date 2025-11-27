@@ -42,9 +42,9 @@ function PageTracker() {
   const location = useLocation();
   useEffect(() => {
     if ((window as any).gtag) {
-      (window as any).gtag("config", "G-JLJVRZ4V16", {
-        page_path: location.pathname + location.search,
-      });
+      const path = location.pathname + location.search;
+      (window as any).gtag("config", "G-JLJVRZ4V16", { page_path: path });
+      (window as any).gtag("config", "G-WK7F4LKGMQ", { page_path: path });
     }
   }, [location]);
   return null;
