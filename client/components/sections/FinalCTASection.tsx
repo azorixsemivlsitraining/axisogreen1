@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function FinalCTASection() {
   const ref = useRef(null);
@@ -134,13 +135,16 @@ export default function FinalCTASection() {
               }}
             >
               <Button
-                size="lg"
-                variant="secondary"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
-              >
-                Request a Quote
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
+  asChild
+  size="lg"
+  variant="secondary"
+  className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
+>
+  <Link to="/get-quote">
+    Request a Quote
+    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+  </Link>
+</Button>
             </motion.div>
 
             <motion.div
