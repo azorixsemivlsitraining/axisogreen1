@@ -44,9 +44,64 @@ export default function Storage() {
       <main className="pt-16">
         <section
           ref={heroRef}
-          className="py-24 bg-gradient-to-br from-background via-green-50 to-accent"
+          className="relative min-h-screen bg-black overflow-hidden flex items-center"
         >
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Hero Images Grid - Sequential animations */}
+          <div className="absolute inset-0 grid grid-cols-3 gap-4 p-8">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={
+                isHeroInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }
+              }
+              transition={{ duration: 0.8, delay: 0 }}
+              className="relative rounded-xl overflow-hidden shadow-2xl"
+            >
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F91bfe972fc9d40d3bc13c8e58f3008a6?format=webp&width=800"
+                alt="Battery Energy Storage System"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={
+                isHeroInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }
+              }
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative rounded-xl overflow-hidden shadow-2xl"
+            >
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff5d1a76f6ce1498da6dd24ab6908705e?format=webp&width=800"
+                alt="Industrial Storage Facility"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={
+                isHeroInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }
+              }
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative rounded-xl overflow-hidden shadow-2xl"
+            >
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F56b22c1148004aef98123ac0296a0564?format=webp&width=800"
+                alt="Grid-Scale Battery Systems"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </motion.div>
+          </div>
+
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
+
+          {/* Text Content */}
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
             <div className="w-full flex justify-start mb-6">
               <BackButton to="/solutions" label="Back to Solutions" />
             </div>
@@ -55,8 +110,8 @@ export default function Storage() {
               animate={
                 isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
               }
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-foreground mb-4"
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
             >
               Energy Storage
             </motion.h1>
@@ -65,21 +120,28 @@ export default function Storage() {
               animate={
                 isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
               }
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-lg text-muted-foreground max-w-3xl mx-auto"
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="text-xl text-gray-100 max-w-3xl mx-auto drop-shadow-lg"
             >
               Battery energy storage solutions to enhance grid resilience,
               provide ancillary services and increase renewable penetration.
             </motion.p>
 
-            <div className="mt-8 flex justify-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-8 flex justify-center gap-4"
+            >
               <Link
                 to="/get-quote#commercial"
-                className="inline-block px-5 py-3 rounded-full bg-primary text-primary-foreground"
+                className="inline-block px-5 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:scale-105 transition-transform"
               >
                 Request Quote
               </Link>
-            </div>
+            </motion.div>
           </div>
         </section>
 
