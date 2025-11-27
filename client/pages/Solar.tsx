@@ -113,6 +113,65 @@ export default function Solar() {
           </div>
         </section>
 
+        {/* Solar Gallery Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Solar Projects in Action
+              </h2>
+              <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+                Discover our diverse solar installations across residential, commercial and utility-scale projects
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F9653bd8b53a24c3991939b84f4187039?format=webp&width=800",
+                  title: "Solar Sunset Integration",
+                  delay: 0,
+                },
+                {
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fba9ba9e9e77a41388face42e74d963ab?format=webp&width=800",
+                  title: "Industrial Solar Farm",
+                  delay: 0.1,
+                },
+                {
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F75d8e101fc5841b68bfa936022242bd5?format=webp&width=800",
+                  title: "Rooftop Solar Array",
+                  delay: 0.2,
+                },
+              ].map((image, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: image.delay }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="group relative overflow-hidden rounded-lg shadow-lg"
+                >
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <p className="text-white font-semibold p-4">{image.title}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Who We Serve Section */}
         <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-green-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
