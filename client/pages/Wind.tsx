@@ -1,8 +1,15 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FloatingActionButton from "@/components/FloatingActionButton";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import ParticleSystem from "@/components/ParticleSystem";
 import {
   Card,
   CardContent,
@@ -17,6 +24,8 @@ import {
   ChartLine,
   Shield,
   Monitor,
+  CheckCircle,
+  Building,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "@/components/BackButton";
@@ -26,6 +35,26 @@ export default function Wind() {
   const listRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
   const isListInView = useInView(listRef, { once: true, margin: "-100px" });
+  const [imageIndex, setImageIndex] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const windImages = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F87fe5c692fd3447b8ee119ccee2af6de?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F230174b17ee14cbeb44610087ef168e0?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff6514fdfb79048f3a644677573b061c3?format=webp&width=800",
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setImageIndex((p) => (p + 1) % windImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [windImages.length]);
 
   const highlights = [
     {
@@ -82,95 +111,465 @@ export default function Wind() {
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="pt-16">
-        <section ref={heroRef} className="py-24 bg-accent/10">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="w-full flex justify-start mb-6">
-              <BackButton />
-            </div>
+        <section
+          ref={heroRef}
+          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-50 via-energy-50 to-blue-50"
+        >
+          {/* Particle System Background */}
+          <ParticleSystem
+            particleCount={60}
+            colors={["#87CEEB", "#4169E1", "#1E90FF", "#00BFFF"]}
+            className="opacity-20"
+          />
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-foreground mb-4"
-            >
-              Wind Energy
-            </motion.h1>
+          <motion.div
+            style={{ y, opacity }}
+            className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10"
+          >
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen">
+              {/* Left Content */}
+              <div className="text-center lg:text-left order-2 lg:order-1">
+                <div className="w-full flex justify-start mb-6">
+                  <BackButton />
+                </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-lg text-muted-foreground max-w-3xl mx-auto"
-            >
-              Comprehensive wind energy services including EPC, hybrid
-              integrations and asset management.
-            </motion.p>
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
+                >
+                  <span className="block bg-gradient-to-r from-sky-600 via-blue-500 to-cyan-600 bg-clip-text text-transparent">
+                    Wind Energy
+                  </span>
+                </motion.h1>
 
-            <div className="mt-8 flex justify-center gap-4">
-              <Link
-                to="/services"
-                className="inline-block px-5 py-3 rounded-full bg-primary text-primary-foreground"
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto lg:mx-0 mb-8 leading-relaxed"
+                >
+                  Comprehensive wind energy services including EPC, hybrid
+                  integrations and asset management.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="flex justify-center lg:justify-start"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Link
+                      to="/services"
+                      className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-sky-500 to-blue-500 text-white font-semibold hover:shadow-lg transition-all"
+                    >
+                      Our Services
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </div>
+
+              {/* Right Content - Animated Image Carousel */}
+              <motion.div
+                className="relative h-[400px] sm:h-[500px] lg:h-[600px] order-1 lg:order-2"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
               >
-                Our Services
-              </Link>
+                <div className="relative w-full h-full rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={imageIndex}
+                      src={windImages[imageIndex]}
+                      alt="Wind Energy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0.2, scale: 1.02 }}
+                      transition={{ duration: 0.8 }}
+                    />
+                  </AnimatePresence>
+                </div>
+
+                {/* Navigation Dots */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-3">
+                  {windImages.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => setImageIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === imageIndex
+                          ? "bg-sky-500 w-8"
+                          : "bg-gray-400 hover:bg-gray-500"
+                      }`}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
+                </div>
+
+                {/* Floating Animated Elements */}
+                {[...Array(2)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className={`absolute w-16 h-16 lg:w-20 lg:h-20 rounded-2xl shadow-lg ${
+                      i === 0
+                        ? "bg-sky-400/20 -top-6 -right-6"
+                        : "bg-blue-400/20 -bottom-6 -left-6"
+                    }`}
+                    animate={{
+                      y: [0, -15, 0],
+                      rotateX: [0, 180, 360],
+                      rotateY: [0, 180, 360],
+                    }}
+                    transition={{
+                      duration: 4 + i,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.5,
+                    }}
+                    style={{ transformStyle: "preserve-3d" }}
+                  />
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Wind Projects Gallery Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Wind Projects in Action
+              </h2>
+              <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+                Discover our diverse wind installations across utility-scale,
+                commercial and hybrid renewable projects
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F87fe5c692fd3447b8ee119ccee2af6de?format=webp&width=800",
+                  title: "Wind Farm Sunset Integration",
+                  delay: 0,
+                },
+                {
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F230174b17ee14cbeb44610087ef168e0?format=webp&width=800",
+                  title: "Utility-Scale Wind Installation",
+                  delay: 0.1,
+                },
+                {
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff6514fdfb79048f3a644677573b061c3?format=webp&width=800",
+                  title: "Highland Wind Project",
+                  delay: 0.2,
+                },
+              ].map((image, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: image.delay }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="group relative overflow-hidden rounded-lg shadow-lg"
+                >
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <p className="text-white font-semibold p-4">
+                      {image.title}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Image + Services grid */}
-        <section className="py-12">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={
-                  isHeroInView
-                    ? { opacity: 1, scale: 1 }
-                    : { opacity: 0, scale: 0.98 }
-                }
-                transition={{ duration: 0.6 }}
-                className="flex items-center justify-center"
-              >
-                
-              </motion.div>
+        {/* Who We Serve Section - Wind Industry Segments */}
+        <section className="py-20 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Wind Energy Solutions
+              </h2>
+              <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                Comprehensive wind EPC services for utility-scale, commercial,
+                and distributed wind projects. Select your application to learn
+                more.
+              </p>
+            </motion.div>
 
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {/* Utility-Scale Wind */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={
-                  isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
-                }
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group"
               >
-                <h3 className="text-2xl font-semibold mb-4">Wind Services</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {windServices.map((s, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.5, delay: idx * 0.06 }}
-                      whileHover={{ scale: 1.02 }}
-                      className="p-4 rounded-lg bg-white shadow"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 bg-primary/10 rounded flex items-center justify-center">
-                          <s.icon className="h-5 w-5 text-primary" />
+                <div className="block p-8 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-sky-200 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-sky-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-gradient-to-br from-sky-100 to-sky-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <WindIcon className="h-8 w-8 text-sky-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      Utility-Scale
+                    </h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Large-scale wind farm EPC & development
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="text-center p-3 bg-sky-50 rounded-xl">
+                        <div className="text-3xl font-bold text-sky-600 mb-1">
+                          45+
                         </div>
-                        <div>
-                          <div className="font-semibold">{s.title}</div>
-                          <div className="text-muted-foreground text-sm">
-                            {s.desc}
-                          </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Projects
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
+                      <div className="text-center p-3 bg-sky-50 rounded-xl">
+                        <div className="text-3xl font-bold text-sky-600 mb-1">
+                          180MW
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Capacity
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 mb-6">
+                      {[
+                        "Site Assessment",
+                        "Permitting Support",
+                        "Turbine Procurement",
+                        "Grid Integration",
+                      ].map((feature, idx) => (
+                        <motion.div
+                          key={feature}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, amount: 0.2 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: 0.4 + idx * 0.1,
+                          }}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center">
+                            <CheckCircle className="h-3 w-3 text-sky-600" />
+                          </div>
+                          <span className="text-sm text-gray-700 font-medium">
+                            {feature}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl p-4 border border-sky-100">
+                      <div className="text-sky-600 text-sm font-bold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-sm text-gray-700 font-medium">
+                        Regional Wind Farm - 50MW Project
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Commercial Wind */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group"
+              >
+                <div className="block p-8 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Building className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      Commercial
+                    </h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Industrial & business wind installations
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="text-center p-3 bg-blue-50 rounded-xl">
+                        <div className="text-3xl font-bold text-blue-600 mb-1">
+                          120+
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Projects
+                        </div>
+                      </div>
+                      <div className="text-center p-3 bg-blue-50 rounded-xl">
+                        <div className="text-3xl font-bold text-blue-600 mb-1">
+                          240MW
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Capacity
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 mb-6">
+                      {[
+                        "Design & Engineering",
+                        "Supply & Logistics",
+                        "Installation O&M",
+                        "Performance Monitoring",
+                      ].map((feature, idx) => (
+                        <motion.div
+                          key={feature}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, amount: 0.2 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: 0.6 + idx * 0.1,
+                          }}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center">
+                            <CheckCircle className="h-3 w-3 text-blue-600" />
+                          </div>
+                          <span className="text-sm text-gray-700 font-medium">
+                            {feature}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 border border-blue-100">
+                      <div className="text-blue-600 text-sm font-bold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-sm text-gray-700 font-medium">
+                        Corporate Campus - 8MW Wind System
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Hybrid Wind-Solar */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group"
+              >
+                <div className="block p-8 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Globe className="h-8 w-8 text-cyan-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      Hybrid Systems
+                    </h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      Integrated wind-solar renewable solutions
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="text-center p-3 bg-cyan-50 rounded-xl">
+                        <div className="text-3xl font-bold text-cyan-600 mb-1">
+                          85+
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Projects
+                        </div>
+                      </div>
+                      <div className="text-center p-3 bg-cyan-50 rounded-xl">
+                        <div className="text-3xl font-bold text-cyan-600 mb-1">
+                          320MW
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Capacity
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 mb-6">
+                      {[
+                        "Hybrid Design Optimization",
+                        "Battery Storage Integration",
+                        "Smart Grid Controls",
+                        "Yield Maximization",
+                      ].map((feature, idx) => (
+                        <motion.div
+                          key={feature}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, amount: 0.2 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: 0.8 + idx * 0.1,
+                          }}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="w-5 h-5 bg-cyan-100 rounded-full flex items-center justify-center">
+                            <CheckCircle className="h-3 w-3 text-cyan-600" />
+                          </div>
+                          <span className="text-sm text-gray-700 font-medium">
+                            {feature}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="bg-gradient-to-r from-cyan-50 to-teal-50 rounded-xl p-4 border border-cyan-100">
+                      <div className="text-cyan-600 text-sm font-bold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-sm text-gray-700 font-medium">
+                        Mixed-Use Development - 15MW Hybrid
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
