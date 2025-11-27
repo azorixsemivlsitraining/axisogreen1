@@ -83,117 +83,145 @@ export default function Solar() {
       <main className="pt-16">
         <section
           ref={heroRef}
-          className="relative min-h-screen bg-black overflow-hidden flex items-center"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-solar-50 via-energy-50 to-sky-50"
         >
-          {/* Hero Images Grid - Sequential animations */}
-          <div className="absolute inset-0 grid grid-cols-3 gap-4 p-8">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={
-                isHeroInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }
-              }
-              transition={{ duration: 0.8, delay: 0 }}
-              className="relative rounded-xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F9653bd8b53a24c3991939b84f4187039?format=webp&width=800"
-                alt="Solar Sunset"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-            </motion.div>
+          {/* Particle System Background */}
+          <ParticleSystem
+            particleCount={60}
+            colors={["#FFD700", "#FFA500", "#FF8C00", "#4169E1"]}
+            className="opacity-20"
+          />
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={
-                isHeroInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }
-              }
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative rounded-xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fba9ba9e9e77a41388face42e74d963ab?format=webp&width=800"
-                alt="Industrial Solar Farm"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-            </motion.div>
+          <motion.div
+            style={{ y, opacity }}
+            className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10"
+          >
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen">
+              {/* Left Content */}
+              <div className="text-center lg:text-left order-2 lg:order-1">
+                <div className="w-full flex justify-start mb-6">
+                  <BackButton to="/solutions" label="Back to Solutions" />
+                </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={
-                isHeroInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }
-              }
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative rounded-xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F75d8e101fc5841b68bfa936022242bd5?format=webp&width=800"
-                alt="Rooftop Solar Array"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-            </motion.div>
-          </div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
+                >
+                  <span className="block bg-gradient-to-r from-solar-600 via-energy-500 to-sky-600 bg-clip-text text-transparent">
+                    Solar Energy
+                  </span>
+                </motion.h1>
 
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto lg:mx-0 mb-8 leading-relaxed"
+                >
+                  Comprehensive solar solutions across residential, commercial and
+                  public sectors — optimized for performance and longevity.
+                </motion.p>
 
-          {/* Text Content */}
-          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
-            <div className="w-full flex justify-start mb-6">
-              <BackButton to="/solutions" label="Back to Solutions" />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                >
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Link
+                      to="/solutions/b2c"
+                      className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-solar-500 to-energy-500 text-white font-semibold hover:shadow-lg transition-all"
+                    >
+                      Residential
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Link
+                      to="/solutions/b2b"
+                      className="inline-block px-6 py-3 rounded-full bg-white text-foreground font-semibold border-2 border-solar-200 hover:shadow-lg transition-all"
+                    >
+                      Commercial
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Link
+                      to="/solutions/b2g"
+                      className="inline-block px-6 py-3 rounded-full bg-solar-50 text-solar-700 font-semibold border-2 border-solar-300 hover:shadow-lg transition-all"
+                    >
+                      Government
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </div>
+
+              {/* Right Content - Animated Image Carousel */}
+              <motion.div
+                className="relative h-[400px] sm:h-[500px] lg:h-[600px] order-1 lg:order-2"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+              >
+                <div className="relative w-full h-full rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={imageIndex}
+                      src={solarImages[imageIndex]}
+                      alt="Solar Energy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0.2, scale: 1.02 }}
+                      transition={{ duration: 0.8 }}
+                    />
+                  </AnimatePresence>
+                </div>
+
+                {/* Navigation Dots */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-3">
+                  {solarImages.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => setImageIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === imageIndex
+                          ? "bg-solar-500 w-8"
+                          : "bg-gray-400 hover:bg-gray-500"
+                      }`}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
+                </div>
+
+                {/* Floating Animated Elements */}
+                {[...Array(2)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className={`absolute w-16 h-16 lg:w-20 lg:h-20 rounded-2xl shadow-lg ${
+                      i === 0
+                        ? "bg-solar-400/20 -top-6 -right-6"
+                        : "bg-energy-400/20 -bottom-6 -left-6"
+                    }`}
+                    animate={{
+                      y: [0, -15, 0],
+                      rotateX: [0, 180, 360],
+                      rotateY: [0, 180, 360],
+                    }}
+                    transition={{
+                      duration: 4 + i,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.5,
+                    }}
+                    style={{ transformStyle: "preserve-3d" }}
+                  />
+                ))}
+              </motion.div>
             </div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
-            >
-              Solar Energy
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-xl text-gray-100 max-w-3xl mx-auto drop-shadow-lg"
-            >
-              Comprehensive solar solutions across residential, commercial and
-              public sectors — optimized for performance and longevity.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={
-                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-8 flex justify-center gap-4"
-            >
-              <Link
-                to="/solutions/b2c"
-                className="inline-block px-5 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:scale-105 transition-transform"
-              >
-                Residential
-              </Link>
-              <Link
-                to="/solutions/b2b"
-                className="inline-block px-5 py-3 rounded-full bg-white text-foreground font-semibold hover:scale-105 transition-transform"
-              >
-                Commercial
-              </Link>
-              <Link
-                to="/solutions/b2g"
-                className="inline-block px-5 py-3 rounded-full bg-white/20 text-white font-semibold border border-white hover:scale-105 transition-transform"
-              >
-                Government
-              </Link>
-            </motion.div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Solar Gallery Section */}
