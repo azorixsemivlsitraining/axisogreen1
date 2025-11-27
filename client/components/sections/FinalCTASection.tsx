@@ -186,7 +186,7 @@ export default function FinalCTASection() {
                 <Phone className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Call Us</h3>
-              <p className="opacity-90">+1 (555) 123-4567</p>
+              <p className="opacity-90">090634 47838</p>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} className="text-center">
@@ -194,7 +194,7 @@ export default function FinalCTASection() {
                 <Mail className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Email Us</h3>
-              <p className="opacity-90">info@axisogreen.com</p>
+              <p className="opacity-90">contact@axisogreen.in</p>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} className="text-center">
