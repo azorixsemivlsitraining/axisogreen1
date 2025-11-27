@@ -33,6 +33,26 @@ export default function Solar() {
   const listRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
   const isListInView = useInView(listRef, { once: true, margin: "-100px" });
+  const [imageIndex, setImageIndex] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const solarImages = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F9653bd8b53a24c3991939b84f4187039?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fba9ba9e9e77a41388face42e74d963ab?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F75d8e101fc5841b68bfa936022242bd5?format=webp&width=800",
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setImageIndex((p) => (p + 1) % solarImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [solarImages.length]);
 
   const highlights = [
     {
