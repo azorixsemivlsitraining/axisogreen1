@@ -169,12 +169,15 @@ export default function FinalCTASection() {
               }}
             >
               <Button
-                size="lg"
-                variant="outline"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
-              >
-                Book Consultation
-              </Button>
+  asChild
+  size="lg"
+  variant="outline"
+  className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold group"
+>
+  <Link to="/contact">
+    Book Consultation
+  </Link>
+</Button>
             </motion.div>
           </motion.div>
 
