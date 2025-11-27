@@ -20,6 +20,26 @@ export default function Storage() {
   const listRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
   const isListInView = useInView(listRef, { once: true, margin: "-100px" });
+  const [imageIndex, setImageIndex] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const storageImages = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F91bfe972fc9d40d3bc13c8e58f3008a6?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff5d1a76f6ce1498da6dd24ab6908705e?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F56b22c1148004aef98123ac0296a0564?format=webp&width=800",
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setImageIndex((p) => (p + 1) % storageImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [storageImages.length]);
 
   const highlights = [
     {
