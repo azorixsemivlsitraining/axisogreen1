@@ -136,7 +136,44 @@ export default function Wind() {
                 transition={{ duration: 0.6 }}
                 className="flex items-center justify-center"
               >
-                
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  {[
+                    {
+                      url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F87fe5c692fd3447b8ee119ccee2af6de?format=webp&width=800",
+                      title: "Wind Farm Sunset",
+                      delay: 0,
+                    },
+                    {
+                      url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F230174b17ee14cbeb44610087ef168e0?format=webp&width=800",
+                      title: "Wind Turbines",
+                      delay: 0.1,
+                    },
+                    {
+                      url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff6514fdfb79048f3a644677573b061c3?format=webp&width=800",
+                      title: "Highland Wind Farm",
+                      delay: 0.2,
+                    },
+                  ].map((image, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: image.delay }}
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                    >
+                      <img
+                        src={image.url}
+                        alt={image.title}
+                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <p className="text-white font-semibold p-3 text-sm">{image.title}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
 
               <motion.div
