@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Sun, Wind, Battery, Zap, ArrowRight, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+
 
 export default function AnimatedSolutionsSection() {
   const ref = useRef(null);
@@ -278,10 +280,17 @@ export default function AnimatedSolutionsSection() {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button size="lg" variant="secondary" className="group">
-                Schedule Consultation
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+<Button
+  asChild
+  size="lg"
+  variant="secondary"
+  className="group"
+>
+  <Link to="/contact">
+    Schedule Consultation
+    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+  </Link>
+</Button>
             </motion.div>
             <motion.div
               whileHover={{
