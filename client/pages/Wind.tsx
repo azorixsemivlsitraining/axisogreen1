@@ -18,6 +18,8 @@ import {
   ChartLine,
   Shield,
   Monitor,
+  CheckCircle,
+  Building,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "@/components/BackButton";
