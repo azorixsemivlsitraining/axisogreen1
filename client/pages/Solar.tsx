@@ -1,7 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FloatingActionButton from "@/components/FloatingActionButton";
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
 import {
@@ -105,7 +111,9 @@ export default function Solar() {
 
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
                 >
@@ -116,21 +124,28 @@ export default function Solar() {
 
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto lg:mx-0 mb-8 leading-relaxed"
                 >
-                  Comprehensive solar solutions across residential, commercial and
-                  public sectors — optimized for performance and longevity.
+                  Comprehensive solar solutions across residential, commercial
+                  and public sectors — optimized for performance and longevity.
                 </motion.p>
 
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                 >
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Link
                       to="/solutions/b2c"
                       className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-solar-500 to-energy-500 text-white font-semibold hover:shadow-lg transition-all"
@@ -138,7 +153,10 @@ export default function Solar() {
                       Residential
                     </Link>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Link
                       to="/solutions/b2b"
                       className="inline-block px-6 py-3 rounded-full bg-white text-foreground font-semibold border-2 border-solar-200 hover:shadow-lg transition-all"
@@ -146,7 +164,10 @@ export default function Solar() {
                       Commercial
                     </Link>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Link
                       to="/solutions/b2g"
                       className="inline-block px-6 py-3 rounded-full bg-solar-50 text-solar-700 font-semibold border-2 border-solar-300 hover:shadow-lg transition-all"
@@ -238,7 +259,8 @@ export default function Solar() {
                 Solar Projects in Action
               </h2>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-                Discover our diverse solar installations across residential, commercial and utility-scale projects
+                Discover our diverse solar installations across residential,
+                commercial and utility-scale projects
               </p>
             </motion.div>
 
@@ -275,7 +297,9 @@ export default function Solar() {
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <p className="text-white font-semibold p-4">{image.title}</p>
+                    <p className="text-white font-semibold p-4">
+                      {image.title}
+                    </p>
                   </div>
                 </motion.div>
               ))}
@@ -288,11 +312,15 @@ export default function Solar() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={
+                isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Who we serve</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Who we serve
+              </h2>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
                 Tailored solar solutions for homeowners, businesses and public
                 sector projects. Select your category to learn more.
@@ -302,7 +330,9 @@ export default function Solar() {
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
-                animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                animate={
+                  isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                }
                 transition={{ duration: 0.8, delay: 0.2 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group"
@@ -316,50 +346,77 @@ export default function Solar() {
                     <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Home className="h-8 w-8 text-purple-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">B2C</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      B2C
+                    </h3>
                     <p className="text-gray-600 mb-6 leading-relaxed">
                       Residential rooftop EPC & consulting
                     </p>
-                    
+
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="text-center p-3 bg-green-50 rounded-xl">
-                        <div className="text-3xl font-bold text-green-600 mb-1">500+</div>
-                        <div className="text-sm text-gray-500 font-medium">Projects</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">
+                          500+
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Projects
+                        </div>
                       </div>
                       <div className="text-center p-3 bg-green-50 rounded-xl">
-                        <div className="text-3xl font-bold text-green-600 mb-1">20-35%</div>
-                        <div className="text-sm text-gray-500 font-medium">Savings</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">
+                          20-35%
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Savings
+                        </div>
                       </div>
                     </div>
 
                     <div className="space-y-3 mb-6">
-                      {["Rooftop Solar", "Battery Storage", "EV Charging", "Net Metering"].map((feature, idx) => (
-                        <motion.div 
-                          key={feature} 
+                      {[
+                        "Rooftop Solar",
+                        "Battery Storage",
+                        "EV Charging",
+                        "Net Metering",
+                      ].map((feature, idx) => (
+                        <motion.div
+                          key={feature}
                           initial={{ opacity: 0, x: -20 }}
-                          animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          animate={
+                            isHeroInView
+                              ? { opacity: 1, x: 0 }
+                              : { opacity: 0, x: -20 }
+                          }
                           transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
                           className="flex items-center gap-3"
                         >
                           <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
                             <CheckCircle className="h-3 w-3 text-green-600" />
                           </div>
-                          <span className="text-sm text-gray-700 font-medium">{feature}</span>
+                          <span className="text-sm text-gray-700 font-medium">
+                            {feature}
+                          </span>
                         </motion.div>
                       ))}
                     </div>
 
                     <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-100">
-                      <div className="text-green-600 text-sm font-bold mb-2">Case Study</div>
-                      <div className="text-sm text-gray-700 font-medium">Green Community - 100 Home Solar Program</div>
+                      <div className="text-green-600 text-sm font-bold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-sm text-gray-700 font-medium">
+                        Green Community - 100 Home Solar Program
+                      </div>
                     </div>
                   </div>
                 </Link>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
-                animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                animate={
+                  isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                }
                 transition={{ duration: 0.8, delay: 0.4 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group"
@@ -373,50 +430,77 @@ export default function Solar() {
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Building className="h-8 w-8 text-blue-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">B2B</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      B2B
+                    </h3>
                     <p className="text-gray-600 mb-6 leading-relaxed">
                       Commercial & industrial EPC, EV infra
                     </p>
-                    
+
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="text-center p-3 bg-green-50 rounded-xl">
-                        <div className="text-3xl font-bold text-green-600 mb-1">150+</div>
-                        <div className="text-sm text-gray-500 font-medium">Projects</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">
+                          150+
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Projects
+                        </div>
                       </div>
                       <div className="text-center p-3 bg-green-50 rounded-xl">
-                        <div className="text-3xl font-bold text-green-600 mb-1">25-40%</div>
-                        <div className="text-sm text-gray-500 font-medium">Savings</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">
+                          25-40%
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Savings
+                        </div>
                       </div>
                     </div>
 
                     <div className="space-y-3 mb-6">
-                      {["Rooftop Solar", "Energy Storage", "Smart Building Systems", "Grid Integration"].map((feature, idx) => (
-                        <motion.div 
-                          key={feature} 
+                      {[
+                        "Rooftop Solar",
+                        "Energy Storage",
+                        "Smart Building Systems",
+                        "Grid Integration",
+                      ].map((feature, idx) => (
+                        <motion.div
+                          key={feature}
                           initial={{ opacity: 0, x: -20 }}
-                          animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          animate={
+                            isHeroInView
+                              ? { opacity: 1, x: 0 }
+                              : { opacity: 0, x: -20 }
+                          }
                           transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
                           className="flex items-center gap-3"
                         >
                           <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
                             <CheckCircle className="h-3 w-3 text-green-600" />
                           </div>
-                          <span className="text-sm text-gray-700 font-medium">{feature}</span>
+                          <span className="text-sm text-gray-700 font-medium">
+                            {feature}
+                          </span>
                         </motion.div>
                       ))}
                     </div>
 
                     <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-100">
-                      <div className="text-green-600 text-sm font-bold mb-2">Case Study</div>
-                      <div className="text-sm text-gray-700 font-medium">Tech Campus - 2.5MW Solar Installation</div>
+                      <div className="text-green-600 text-sm font-bold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-sm text-gray-700 font-medium">
+                        Tech Campus - 2.5MW Solar Installation
+                      </div>
                     </div>
                   </div>
                 </Link>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
-                animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                animate={
+                  isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+                }
                 transition={{ duration: 0.8, delay: 0.6 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group"
@@ -430,42 +514,67 @@ export default function Solar() {
                     <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Factory className="h-8 w-8 text-green-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">B2G</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      B2G
+                    </h3>
                     <p className="text-gray-600 mb-6 leading-relaxed">
                       Government & public rooftop programs
                     </p>
-                    
+
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="text-center p-3 bg-green-50 rounded-xl">
-                        <div className="text-3xl font-bold text-green-600 mb-1">80+</div>
-                        <div className="text-sm text-gray-500 font-medium">Projects</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">
+                          80+
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Projects
+                        </div>
                       </div>
                       <div className="text-center p-3 bg-green-50 rounded-xl">
-                        <div className="text-3xl font-bold text-green-600 mb-1">30-50%</div>
-                        <div className="text-sm text-gray-500 font-medium">Savings</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">
+                          30-50%
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          Savings
+                        </div>
                       </div>
                     </div>
 
                     <div className="space-y-3 mb-6">
-                      {["Utility-Scale Solar", "Wind Energy", "Cogeneration", "Peak Load Management"].map((feature, idx) => (
-                        <motion.div 
-                          key={feature} 
+                      {[
+                        "Utility-Scale Solar",
+                        "Wind Energy",
+                        "Cogeneration",
+                        "Peak Load Management",
+                      ].map((feature, idx) => (
+                        <motion.div
+                          key={feature}
                           initial={{ opacity: 0, x: -20 }}
-                          animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          animate={
+                            isHeroInView
+                              ? { opacity: 1, x: 0 }
+                              : { opacity: 0, x: -20 }
+                          }
                           transition={{ duration: 0.5, delay: 0.8 + idx * 0.1 }}
                           className="flex items-center gap-3"
                         >
                           <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
                             <CheckCircle className="h-3 w-3 text-green-600" />
                           </div>
-                          <span className="text-sm text-gray-700 font-medium">{feature}</span>
+                          <span className="text-sm text-gray-700 font-medium">
+                            {feature}
+                          </span>
                         </motion.div>
                       ))}
                     </div>
 
                     <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-100">
-                      <div className="text-green-600 text-sm font-bold mb-2">Case Study</div>
-                      <div className="text-sm text-gray-700 font-medium">Steel Plant - 10MW Hybrid System</div>
+                      <div className="text-green-600 text-sm font-bold mb-2">
+                        Case Study
+                      </div>
+                      <div className="text-sm text-gray-700 font-medium">
+                        Steel Plant - 10MW Hybrid System
+                      </div>
                     </div>
                   </div>
                 </Link>

@@ -1,7 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FloatingActionButton from "@/components/FloatingActionButton";
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import ParticleSystem from "@/components/ParticleSystem";
 import {
@@ -129,7 +135,9 @@ export default function Wind() {
 
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
                 >
@@ -140,7 +148,9 @@ export default function Wind() {
 
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="text-lg lg:text-xl text-muted-foreground max-w-2xl lg:max-w-3xl mx-auto lg:mx-0 mb-8 leading-relaxed"
                 >
@@ -150,11 +160,16 @@ export default function Wind() {
 
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="flex justify-center lg:justify-start"
                 >
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Link
                       to="/services"
                       className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-sky-500 to-blue-500 text-white font-semibold hover:shadow-lg transition-all"
@@ -246,7 +261,8 @@ export default function Wind() {
                 Wind Projects in Action
               </h2>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-                Discover our diverse wind installations across utility-scale, commercial and hybrid renewable projects
+                Discover our diverse wind installations across utility-scale,
+                commercial and hybrid renewable projects
               </p>
             </motion.div>
 
@@ -283,7 +299,9 @@ export default function Wind() {
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <p className="text-white font-semibold p-4">{image.title}</p>
+                    <p className="text-white font-semibold p-4">
+                      {image.title}
+                    </p>
                   </div>
                 </motion.div>
               ))}
@@ -305,7 +323,9 @@ export default function Wind() {
                 Wind Energy Solutions
               </h2>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                Comprehensive wind EPC services for utility-scale, commercial, and distributed wind projects. Select your application to learn more.
+                Comprehensive wind EPC services for utility-scale, commercial,
+                and distributed wind projects. Select your application to learn
+                more.
               </p>
             </motion.div>
 
