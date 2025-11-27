@@ -20,6 +20,26 @@ export default function EVStations() {
   const listRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
   const isListInView = useInView(listRef, { once: true, margin: "-100px" });
+  const [imageIndex, setImageIndex] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const evImages = [
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fe6855fc4810f4f7086aa72fd0193f81a?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fd9a66f964b9f4970877cbf768cbebae2?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F98cd350e825246b897909ef2a0e57fdd?format=webp&width=800",
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setImageIndex((p) => (p + 1) % evImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [evImages.length]);
 
   const highlights = [
     {
