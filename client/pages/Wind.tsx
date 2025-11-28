@@ -44,9 +44,9 @@ export default function Wind() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const windImages = [
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F87fe5c692fd3447b8ee119ccee2af6de?format=webp&width=800",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F230174b17ee14cbeb44610087ef168e0?format=webp&width=800",
-    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff6514fdfb79048f3a644677573b061c3?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F67f959485463482d91b928b7b4efc801?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F4872016e84344ad994d0a9b821b776f6?format=webp&width=800",
+    "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F0dc77a9e519943e89e6d6bc865d7e354?format=webp&width=800",
   ];
 
   useEffect(() => {
