@@ -238,17 +238,17 @@ export default function EVStations() {
               {[
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F130d4ce0793c47c780e0c57baeeddeb0?format=webp&width=800",
-                  title: "Home EV Charging Installation",
+                  
                   delay: 0,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F20a6c8d3e68446b2a5b724588c7b013e?format=webp&width=800",
-                  title: "Solar-Powered EV Parking",
+                  
                   delay: 0.1,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fa3202d78dd4f4ac7b6564205483b8ef6?format=webp&width=800",
-                  title: "Ultra-Fast Charging Network",
+                  
                   delay: 0.2,
                 },
               ].map((image, idx) => (
