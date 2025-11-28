@@ -270,17 +270,16 @@ export default function Wind() {
               {[
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F67f959485463482d91b928b7b4efc801?format=webp&width=800",
-                  title: "Wind Turbine Array Installation",
                   delay: 0,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F4872016e84344ad994d0a9b821b776f6?format=webp&width=800",
-                  title: "Utility-Scale Wind Farm",
+                  
                   delay: 0.1,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F0dc77a9e519943e89e6d6bc865d7e354?format=webp&width=800",
-                  title: "Grid-Connected Wind Project",
+                  
                   delay: 0.2,
                 },
               ].map((image, idx) => (
