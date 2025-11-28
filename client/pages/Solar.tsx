@@ -268,17 +268,14 @@ export default function Solar() {
               {[
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F6b13b66c40c1461eb78b5e4cfd4f7914?format=webp&width=800",
-                  title: "Solar & Wind Integration",
                   delay: 0,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F11e10bc14fe74ae6b42cde71e8eaedbb?format=webp&width=800",
-                  title: "Industrial Solar Installation",
                   delay: 0.1,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fba5332782dd642b6a4640eb4bf00fc36?format=webp&width=800",
-                  title: "Commercial Solar Array",
                   delay: 0.2,
                 },
               ].map((image, idx) => (
