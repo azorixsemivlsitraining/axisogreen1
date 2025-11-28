@@ -267,18 +267,18 @@ export default function Solar() {
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F9653bd8b53a24c3991939b84f4187039?format=webp&width=800",
-                  title: "Solar Sunset Integration",
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F6b13b66c40c1461eb78b5e4cfd4f7914?format=webp&width=800",
+                  title: "Solar & Wind Integration",
                   delay: 0,
                 },
                 {
-                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fba9ba9e9e77a41388face42e74d963ab?format=webp&width=800",
-                  title: "Industrial Solar Farm",
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F11e10bc14fe74ae6b42cde71e8eaedbb?format=webp&width=800",
+                  title: "Industrial Solar Installation",
                   delay: 0.1,
                 },
                 {
-                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F75d8e101fc5841b68bfa936022242bd5?format=webp&width=800",
-                  title: "Rooftop Solar Array",
+                  url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Fba5332782dd642b6a4640eb4bf00fc36?format=webp&width=800",
+                  title: "Commercial Solar Array",
                   delay: 0.2,
                 },
               ].map((image, idx) => (
