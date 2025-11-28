@@ -228,17 +228,17 @@ export default function Storage() {
               {[
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F91bfe972fc9d40d3bc13c8e58f3008a6?format=webp&width=800",
-                  title: "Battery Energy Storage System",
+                  
                   delay: 0,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2Ff5d1a76f6ce1498da6dd24ab6908705e?format=webp&width=800",
-                  title: "Industrial Storage Facility",
+                  
                   delay: 0.1,
                 },
                 {
                   url: "https://cdn.builder.io/api/v1/image/assets%2F5c07bd532d434c36b4bb2918deeee627%2F56b22c1148004aef98123ac0296a0564?format=webp&width=800",
-                  title: "Grid-Scale Battery Systems",
+                  
                   delay: 0.2,
                 },
               ].map((image, idx) => (
