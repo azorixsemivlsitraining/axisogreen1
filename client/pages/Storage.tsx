@@ -99,7 +99,7 @@ export default function Storage() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
                 >
-                  <span className="block bg-gradient-to-r from-cyan-600 via-teal-500 to-blue-600 bg-clip-text text-transparent">
+                  <span className="block pb-3 bg-gradient-to-r from-cyan-600 via-teal-500 to-blue-600 bg-clip-text text-transparent">
                     Energy Storage
                   </span>
                 </motion.h1>
